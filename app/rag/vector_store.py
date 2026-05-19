@@ -4,6 +4,8 @@ from langchain_openai import (
     OpenAIEmbeddings
 )
 
+from pathlib import Path
+
 from app.utils.config import (
     OPENAI_API_KEY
 )
@@ -22,6 +24,21 @@ embedding_model = OpenAIEmbeddings(
     model="text-embedding-3-small"
 )
 
+def load_vector_store():
+
+    if not Path("faiss_index").exists():
+
+        raise Exception(
+            "faiss_index missing"
+        )
+
+    vector_store = FAISS.load_local(
+        "faiss_index",
+        embedding_model,
+        allow_dangerous_deserialization=True
+    )
+
+    return vector_store
 
 def build_vector_store():
 
@@ -44,6 +61,12 @@ def build_vector_store():
 
 
 def load_vector_store():
+
+    if not Path("faiss_index").exists():
+
+        raise Exception(
+            "faiss_index missing"
+        )
 
     vector_store = FAISS.load_local(
         "faiss_index",
