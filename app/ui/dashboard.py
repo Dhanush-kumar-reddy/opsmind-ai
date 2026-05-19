@@ -1,7 +1,6 @@
 import pandas as pd
-import streamlit as st
 import requests
-from app.graph.workflow import graph
+import streamlit as st
 
 from app.database.incident_memory import (
     get_all_incidents
@@ -22,6 +21,12 @@ st.title("OpsMind AI")
 st.subheader(
     "AI Incident Management System"
 )
+
+
+if "analysis_complete" not in st.session_state:
+
+    st.session_state.analysis_complete = False
+
 
 with st.sidebar:
 
@@ -59,22 +64,42 @@ if analyze_button:
         "description": description
     }
 
-    with st.spinner(
-        "Running multi-agent analysis..."
-    ):
+    try:
 
-        response = requests.post(
-        "http://127.0.0.1:8000/analyze",
-        json=incident
-    )
+        with st.spinner(
+            "Running multi-agent analysis..."
+        ):
 
-    result = response.json()
+            response = requests.post(
+                "https://opsmind-ai-i2y2.onrender.com/analyze",
+                json=incident,
+                timeout=120
+            )
+
+        response.raise_for_status()
+
+        result = response.json()
+
+        st.session_state.result = result
+
+        st.session_state.analysis_complete = True
+
+        st.success(
+            "Incident analysis completed."
+        )
+
+    except Exception as error:
+
+        st.error(
+            f"Request failed: {error}"
+        )
+
+
+if st.session_state.analysis_complete:
+
+    result = st.session_state.result
 
     summary = result["summary_result"]
-
-    st.success(
-        "Incident analysis completed."
-    )
 
     tabs = st.tabs([
         "Overview",
