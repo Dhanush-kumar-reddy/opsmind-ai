@@ -1,0 +1,7 @@
+2026-05-18 13:09:40 INFO OrderService Queue listener started
+2026-05-18 13:09:45 WARNING OrderService Message queue latency increased
+2026-05-18 13:09:48 WARNING OrderService Queue backlog threshold exceeded
+2026-05-18 13:09:52 ERROR OrderService Worker timeout detected
+2026-05-18 13:09:56 WARNING OrderService Processing delayed
+2026-05-18 13:10:00 INFO OrderService Auto scaling triggered
+2026-05-18 13:10:04 INFO OrderService Additional workers added

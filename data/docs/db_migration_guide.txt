@@ -1,0 +1,15 @@
+Database Migration Failure Guide
+
+If deployment introduces schema-related errors:
+
+1. Verify migration version compatibility
+2. Re-run failed migration scripts
+3. Check production database schema
+4. Validate new columns and indexes
+5. Restart affected services
+
+Common symptoms:
+- Missing column errors
+- Transaction rollback
+- HTTP 500 responses
+- Service instability

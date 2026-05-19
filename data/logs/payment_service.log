@@ -1,0 +1,7 @@
+2026-05-18 11:44:50 INFO PaymentService Deployment version v5.1.0 started
+2026-05-18 11:45:02 INFO PaymentService Payment request initiated
+2026-05-18 11:45:04 ERROR PaymentService DatabaseError column 'payment_status' does not exist
+2026-05-18 11:45:06 ERROR PaymentService Transaction rollback initiated
+2026-05-18 11:45:08 ERROR PaymentService Payment request failed with HTTP 500
+2026-05-18 11:45:10 WARNING PaymentService Retry attempt failed
+2026-05-18 11:45:12 ERROR PaymentService Service unhealthy

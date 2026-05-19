@@ -1,0 +1,14 @@
+Redis Connection Troubleshooting Guide
+
+If Redis connection failures occur after deployment:
+
+1. Verify REDIS_HOST environment variable
+2. Ensure Redis container is healthy
+3. Check network connectivity
+4. Restart authentication service
+5. Validate Redis credentials
+
+Common symptoms:
+- Session creation failure
+- Authentication errors
+- Login failures

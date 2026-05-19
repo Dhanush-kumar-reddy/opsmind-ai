@@ -1,0 +1,14 @@
+Queue Backlog Resolution Guide
+
+Queue processing delays may occur due to:
+
+1. Insufficient worker instances
+2. High traffic spikes
+3. Worker crashes
+4. Message retry storms
+
+Recommended actions:
+- Scale worker replicas
+- Restart failed workers
+- Monitor queue latency
+- Increase processing concurrency

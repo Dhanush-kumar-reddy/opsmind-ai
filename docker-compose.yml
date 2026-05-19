@@ -1,0 +1,51 @@
+
+services:
+
+  postgres:
+
+    image: postgres:15
+
+    container_name: opsmind_postgres
+
+    environment:
+      POSTGRES_DB: opsmind_ai
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+  backend:
+
+    build: .
+
+    container_name: opsmind_backend
+
+    command: >
+      uvicorn app.api.server:app
+      --host 0.0.0.0
+      --port 8000
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      - postgres
+
+  frontend:
+
+    build: .
+
+    container_name: opsmind_frontend
+
+    command: >
+      streamlit run app/ui/dashboard.py
+      --server.address 0.0.0.0
+      --server.port 8501
+      --server.fileWatcherType none
+
+    ports:
+      - "8501:8501"
+
+    depends_on:
+      - backend

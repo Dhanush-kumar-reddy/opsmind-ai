@@ -1,0 +1,8 @@
+2026-05-18 10:11:58 INFO AuthService Deployment version v2.4.1 started
+2026-05-18 10:12:01 INFO AuthService Login request received
+2026-05-18 10:12:03 WARNING AuthService Redis response delayed
+2026-05-18 10:12:05 ERROR AuthService Redis connection failed
+2026-05-18 10:12:07 ERROR AuthService Session creation failed
+2026-05-18 10:12:09 ERROR AuthService User authentication failed
+2026-05-18 10:12:11 WARNING AuthService Retry attempt failed
+2026-05-18 10:12:13 ERROR AuthService Login request terminated

@@ -1,0 +1,9 @@
+{
+  "service": "Auth API",
+  "cpu_usage": 91,
+  "memory_usage": 86,
+  "error_rate": 34,
+  "response_time_ms": 4200,
+  "healthy_instances": 1,
+  "total_instances": 4
+}

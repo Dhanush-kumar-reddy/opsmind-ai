@@ -1,0 +1,9 @@
+{
+  "incident_id": "INC001",
+  "service": "Auth API",
+  "severity": "High",
+  "timestamp": "2026-05-18T10:12:00",
+  "description": "Users unable to login after latest deployment",
+  "reported_by": "monitoring-system",
+  "status": "open"
+}

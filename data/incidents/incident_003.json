@@ -1,0 +1,9 @@
+{
+  "incident_id": "INC003",
+  "service": "Order Service",
+  "severity": "Medium",
+  "timestamp": "2026-05-18T13:10:00",
+  "description": "Order processing delayed due to queue backlog",
+  "reported_by": "monitoring-system",
+  "status": "investigating"
+}

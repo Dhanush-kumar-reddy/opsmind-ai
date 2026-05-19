@@ -1,0 +1,9 @@
+{
+  "service": "Payment API",
+  "cpu_usage": 74,
+  "memory_usage": 68,
+  "error_rate": 27,
+  "response_time_ms": 3100,
+  "healthy_instances": 2,
+  "total_instances": 5
+}

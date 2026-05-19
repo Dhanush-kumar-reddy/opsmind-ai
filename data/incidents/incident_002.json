@@ -1,0 +1,9 @@
+{
+  "incident_id": "INC002",
+  "service": "Payment API",
+  "severity": "Critical",
+  "timestamp": "2026-05-18T11:45:00",
+  "description": "Payment transactions failing with 500 Internal Server Error",
+  "reported_by": "customer-support",
+  "status": "open"
+}

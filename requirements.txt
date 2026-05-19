@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+streamlit
+langgraph
+langchain
+langchain-community
+langchain-huggingface
+sentence-transformers
+faiss-cpu
+sqlalchemy
+psycopg2-binary
+pandas
+requests
+python-dotenv
+groq
