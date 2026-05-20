@@ -17,9 +17,17 @@ from app.tools.metrics_tool import (
     load_metrics
 )
 
-from app.rag.incident_similarity import (
-    find_similar_incidents
-)
+try:
+
+    from app.rag.incident_similarity import (
+        find_similar_incidents
+    )
+
+    SIMILARITY_ENABLED = True
+
+except Exception:
+
+    SIMILARITY_ENABLED = False
 
 from app.core.config import (
     API_TIMEOUT
@@ -635,8 +643,7 @@ if st.session_state.analysis_complete:
         )
 
         st.info(
-            "Historical incidents are "
-            "managed by backend services."
+            "Database features disabled in cloud deployment."
         )
 
     with tabs[4]:
@@ -728,57 +735,65 @@ if st.session_state.analysis_complete:
             "Similar Historical Incidents"
         )
 
-        try:
+        if not SIMILARITY_ENABLED:
 
-            similar_incidents = (
-                find_similar_incidents(
-                    summary.get(
-                        "description",
-                        ""
-                    )
-                )
+            st.warning(
+                "Similarity search disabled in cloud deployment."
             )
 
-            if not similar_incidents:
+        else:
 
-                st.info(
-                    "No similar incidents found."
+            try:
+
+                similar_incidents = (
+                    find_similar_incidents(
+                        summary.get(
+                            "description",
+                            ""
+                        )
+                    )
                 )
 
-            else:
+                if not similar_incidents:
 
-                for incident in similar_incidents:
-
-                    metadata = getattr(
-                        incident,
-                        "metadata",
-                        {}
+                    st.info(
+                        "No similar incidents found."
                     )
 
-                    st.markdown(
-                        f"### "
-                        f"{metadata.get('incident_id', 'Unknown')}"
-                    )
+                else:
 
-                    st.write(
-                        f"Service: "
-                        f"{metadata.get('service', 'Unknown')}"
-                    )
+                    for incident in similar_incidents:
 
-                    st.write(
-                        f"Root Cause: "
-                        f"{metadata.get('root_cause', 'Unknown')}"
-                    )
+                        metadata = getattr(
+                            incident,
+                            "metadata",
+                            {}
+                        )
 
-                    st.code(
-                        incident.page_content
-                    )
+                        st.markdown(
+                            f"### "
+                            f"{metadata.get('incident_id', 'Unknown')}"
+                        )
 
-                    st.divider()
+                        st.write(
+                            f"Service: "
+                            f"{metadata.get('service', 'Unknown')}"
+                        )
 
-        except Exception as error:
+                        st.write(
+                            f"Root Cause: "
+                            f"{metadata.get('root_cause', 'Unknown')}"
+                        )
 
-            st.error(
-                f"Similarity Search Error: "
-                f"{error}"
-            )
+                        st.code(
+                            incident.page_content
+                        )
+
+                        st.divider()
+
+            except Exception as error:
+
+                st.error(
+                    f"Similarity Search Error: "
+                    f"{error}"
+                )
