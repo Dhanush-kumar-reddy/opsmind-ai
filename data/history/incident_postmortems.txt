@@ -1,0 +1,154 @@
+Incident: INC-2026-0401
+Service: Auth API
+Severity: High
+
+Summary
+Users experienced intermittent login failures
+after a Redis replica synchronization issue.
+
+Observed Symptoms
+- Login requests timing out
+- Session creation failures
+- Elevated API retry count
+- Increased authentication latency
+
+Root Cause
+Redis replication synchronization failed
+during high traffic load causing stale
+session reads and connection instability.
+
+Resolution
+- Restarted Redis replicas
+- Cleared stale authentication sessions
+- Increased Redis connection pool size
+- Enabled additional monitoring alerts
+
+--------------------------------------------------
+
+Incident: INC-2026-0408
+Service: Payment API
+Severity: Critical
+
+Summary
+Payment processing became unstable
+during PostgreSQL connection saturation.
+
+Observed Symptoms
+- Payment transaction timeout
+- Increased rollback operations
+- Elevated database latency
+- Queue backlog growth
+
+Root Cause
+Database connection pool exhaustion
+combined with slow transaction queries.
+
+Resolution
+- Added PostgreSQL read replicas
+- Optimized slow payment queries
+- Increased connection pool limits
+- Enabled query latency alerts
+
+--------------------------------------------------
+
+Incident: INC-2026-0424
+Service: Kubernetes Cluster
+Severity: Critical
+
+Summary
+A deployment rollout triggered
+large-scale pod restart storms.
+
+Observed Symptoms
+- CrashLoopBackOff pods
+- Autoscaler instability
+- High node CPU usage
+- API response degradation
+
+Root Cause
+Improper readiness probe configuration
+caused unstable rollout behavior.
+
+Resolution
+- Rolled back deployment
+- Tuned readiness probe thresholds
+- Increased node pool capacity
+- Added deployment health validation
+
+--------------------------------------------------
+
+Incident: INC-2026-0502
+Service: API Gateway
+Severity: High
+
+Summary
+Gateway services returned elevated
+502 errors during authentication traffic spikes.
+
+Observed Symptoms
+- 502 Bad Gateway responses
+- Increased retry amplification
+- Request queue saturation
+- Elevated ingress latency
+
+Root Cause
+Auth-service upstream latency
+caused API gateway retry storms.
+
+Resolution
+- Reduced retry amplification
+- Added gateway replicas
+- Tuned request timeout settings
+- Improved upstream health checks
+
+--------------------------------------------------
+
+Incident: INC-2026-0508
+Service: Redis
+Severity: Critical
+
+Summary
+Redis cluster memory saturation
+caused authentication instability.
+
+Observed Symptoms
+- Redis timeout errors
+- Session retrieval failures
+- Elevated cache latency
+- Connection exhaustion
+
+Root Cause
+Redis cluster memory pressure
+combined with excessive client retries.
+
+Resolution
+- Scaled Redis cluster horizontally
+- Cleared unhealthy connections
+- Tuned Redis memory configuration
+- Added cache utilization monitoring
+
+--------------------------------------------------
+
+Incident: INC-2026-0511
+Service: PostgreSQL
+Severity: High
+
+Summary
+Database replication lag affected
+API transaction performance.
+
+Observed Symptoms
+- Slow database response
+- Elevated transaction latency
+- Replica synchronization delay
+- Increased retry requests
+
+Root Cause
+Replica WAL synchronization interruption
+during traffic spikes.
+
+Resolution
+- Restarted unhealthy replicas
+- Validated WAL synchronization
+- Tuned replication timeout settings
+- Added replication lag alerts

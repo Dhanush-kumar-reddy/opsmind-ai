@@ -1,0 +1,110 @@
+PostgreSQL Incident Response Guide
+
+Overview
+This document contains operational guidance
+for handling PostgreSQL outages, replication
+issues, high latency events, and database
+resource exhaustion in production systems.
+
+Common Symptoms
+- Database connection timeout
+- Slow SQL queries
+- Connection pool exhaustion
+- Replication lag increasing
+- Transactions stuck for long durations
+- API failures caused by database timeout
+- Sudden increase in query latency
+- High disk I/O utilization
+- Frequent deadlocks
+- Read replica instability
+
+Critical Error Patterns
+- FATAL: remaining connection slots reserved
+- could not connect to server
+- terminating connection due to administrator command
+- deadlock detected
+- database system is starting up
+- replication timeout exceeded
+- WAL receiver process terminated
+- disk full during transaction write
+
+Primary Root Causes
+1. Too many open database connections
+2. Missing indexes on high-traffic queries
+3. Long-running transactions
+4. Replication synchronization failures
+5. Storage saturation
+6. CPU bottlenecks
+7. Sudden traffic spikes
+8. Improper query optimization
+9. Misconfigured connection pools
+10. Resource starvation during deployment
+
+Operational Impact
+- Login failures
+- Payment transaction failures
+- Order processing delays
+- Elevated API latency
+- Service-wide request timeouts
+- Cascading failures across microservices
+
+High Risk Metrics
+- CPU usage above 85%
+- Memory usage above 80%
+- Active connections above 90%
+- Query latency above 1500ms
+- Replication lag above 20 seconds
+- Disk usage above 90%
+
+Recommended Fixes
+1. Restart overloaded database replicas
+2. Increase connection pool limits carefully
+3. Kill blocked transactions
+4. Optimize high-latency queries
+5. Add missing indexes
+6. Scale database vertically
+7. Enable read replicas for heavy workloads
+8. Reduce application retry storms
+9. Tune PostgreSQL memory configuration
+10. Archive old transaction logs
+
+Recovery Procedure
+1. Confirm database availability
+2. Check active query list
+3. Review slow query logs
+4. Validate replication health
+5. Inspect connection pool metrics
+6. Restart unhealthy replicas
+7. Monitor API recovery
+8. Validate application transactions
+9. Observe latency stabilization
+10. Close incident after recovery verification
+
+Best Practices
+- Use connection pooling
+- Enable automated backups
+- Monitor replication continuously
+- Configure database failover
+- Use query performance monitoring
+- Limit long-running transactions
+- Scale proactively during peak traffic
+- Separate analytics workloads from production
+
+Severity Mapping
+Critical
+- Full database outage
+- Transaction failure across services
+- Severe replication failure
+
+High
+- Elevated latency affecting production APIs
+- Connection exhaustion
+- Heavy query contention
+
+Medium
+- Minor replication lag
+- Temporary query slowdown
+
+Low
+- Background maintenance alerts
+- Non-production database warnings

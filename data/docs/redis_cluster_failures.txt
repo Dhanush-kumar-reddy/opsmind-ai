@@ -1,0 +1,111 @@
+Redis Cluster Failure Troubleshooting Guide
+
+Overview
+This document explains operational failures
+related to Redis clusters, cache outages,
+high latency, replication instability,
+and authentication service disruptions.
+
+Common Symptoms
+- Authentication failures
+- Session creation failures
+- Login request timeout
+- Elevated cache latency
+- Redis connection refused
+- API retry storms
+- Token validation failures
+- High request queue buildup
+- Increased response latency
+- Sudden spike in failed user sessions
+
+Critical Error Patterns
+- Redis connection failed
+- READONLY You can't write against a read only replica
+- MISCONF Redis is configured to save RDB snapshots
+- NOAUTH Authentication required
+- Connection reset by peer
+- Timeout connecting to Redis
+- Max clients reached
+- Redis replication broken
+- Failed to acquire distributed lock
+
+Primary Root Causes
+1. Redis node crash
+2. Network partition between services
+3. Connection pool exhaustion
+4. Memory saturation
+5. Redis failover instability
+6. Excessive cache eviction
+7. Slow persistence operations
+8. Incorrect environment configuration
+9. Deployment misconfiguration
+10. High traffic spikes during peak usage
+
+Operational Impact
+- Users unable to login
+- Session invalidation across services
+- Payment authorization delays
+- Increased API response time
+- Cascading microservice failures
+- Authentication token rejection
+
+High Risk Metrics
+- Redis latency above 1000ms
+- Cache hit rate below 70%
+- Memory usage above 90%
+- Connection utilization above 85%
+- Replica sync lag above 15 seconds
+- Error rate above 10%
+
+Recommended Fixes
+1. Restart unhealthy Redis nodes
+2. Validate REDIS_HOST configuration
+3. Scale Redis cluster horizontally
+4. Increase memory allocation
+5. Reduce unnecessary cache writes
+6. Tune connection pool size
+7. Enable Redis monitoring dashboards
+8. Configure proper failover strategy
+9. Isolate high-traffic workloads
+10. Restart dependent authentication services
+
+Recovery Procedure
+1. Verify Redis cluster health
+2. Inspect replication status
+3. Check memory consumption
+4. Validate network connectivity
+5. Restart failed replicas
+6. Clear stale connections
+7. Validate authentication flow
+8. Monitor API recovery metrics
+9. Observe cache stabilization
+10. Close incident after validation
+
+Best Practices
+- Enable Redis persistence monitoring
+- Use high availability clusters
+- Separate session and cache workloads
+- Configure retry backoff strategies
+- Monitor replication continuously
+- Avoid oversized cache objects
+- Use health checks for Redis nodes
+- Scale before peak traffic windows
+
+Severity Mapping
+Critical
+- Full Redis outage
+- Authentication system unavailable
+- Session management failure
+
+High
+- Elevated cache latency
+- Login instability
+- Partial replica failure
+
+Medium
+- Temporary failover delay
+- Increased retry activity
+
+Low
+- Minor cache eviction warnings
+- Non-production Redis alerts

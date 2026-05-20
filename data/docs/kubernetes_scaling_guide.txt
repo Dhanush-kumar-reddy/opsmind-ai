@@ -1,0 +1,91 @@
+Kubernetes Auto Scaling Troubleshooting Guide
+
+Overview
+This document explains common scaling failures,
+pod instability issues, CPU throttling problems,
+and deployment bottlenecks in Kubernetes clusters.
+
+Common Symptoms
+- Pods stuck in Pending state
+- CrashLoopBackOff errors
+- Horizontal Pod Autoscaler not scaling
+- High API response latency
+- Node resource exhaustion
+- Memory pressure warnings
+- Services unavailable during deployment
+- Rolling updates failing
+- Container restart spikes
+- Unhealthy Kubernetes nodes
+
+Root Causes
+1. CPU resource limits too low
+2. Memory leaks in application containers
+3. Node pool exhaustion
+4. Failed liveness or readiness probes
+5. Misconfigured autoscaling policies
+6. Docker image pull failures
+7. Network policy restrictions
+8. Insufficient replica count
+9. Redis dependency latency
+10. Database connection saturation
+
+Scaling Failure Indicators
+- HPA desired replicas increasing continuously
+- Pods waiting for scheduling
+- Node CPU usage above 90%
+- API response latency above 2000ms
+- Frequent container restarts
+- Increased 5xx server errors
+- Traffic spikes during deployment windows
+
+Recommended Fixes
+1. Increase node pool capacity
+2. Tune autoscaling thresholds
+3. Raise CPU and memory requests
+4. Optimize application startup time
+5. Verify Kubernetes probe configuration
+6. Add circuit breakers for failing services
+7. Scale Redis and PostgreSQL separately
+8. Use rolling deployments with health checks
+9. Configure pod disruption budgets
+10. Monitor latency and queue depth metrics
+
+Operational Best Practices
+- Monitor cluster utilization continuously
+- Keep autoscaling enabled for production workloads
+- Separate critical workloads into dedicated node pools
+- Use centralized logging and alerting
+- Run load testing before deployments
+- Enable distributed tracing for debugging
+- Maintain redundancy for stateful services
+
+Severity Mapping
+Critical
+- Multiple node failures
+- Cluster-wide outages
+- Production API downtime
+
+High
+- Major service degradation
+- Large-scale pod failures
+- Severe latency spikes
+
+Medium
+- Temporary autoscaling delays
+- Increased restart frequency
+
+Low
+- Minor warning alerts
+- Non-production cluster instability
+
+Recovery Checklist
+1. Verify cluster node health
+2. Check autoscaler activity
+3. Validate deployment rollout status
+4. Inspect pod events
+5. Review container logs
+6. Confirm Redis and database health
+7. Restart failed deployments if required
+8. Scale workloads gradually
+9. Validate traffic recovery
+10. Close incident after monitoring stabilization

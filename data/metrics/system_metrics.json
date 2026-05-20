@@ -1,0 +1,93 @@
+[
+  {
+    "service": "Auth API",
+    "cpu_usage": 91,
+    "memory_usage": 86,
+    "error_rate": 34,
+    "healthy_instances": 2,
+    "total_instances": 4,
+    "request_latency_ms": 2400,
+    "requests_per_minute": 18200,
+    "database_connections": 88,
+    "redis_latency_ms": 2100,
+    "status": "critical"
+  },
+  {
+    "service": "Payment API",
+    "cpu_usage": 83,
+    "memory_usage": 79,
+    "error_rate": 18,
+    "healthy_instances": 2,
+    "total_instances": 3,
+    "request_latency_ms": 1700,
+    "requests_per_minute": 9200,
+    "database_connections": 96,
+    "redis_latency_ms": 620,
+    "status": "degraded"
+  },
+  {
+    "service": "Order API",
+    "cpu_usage": 71,
+    "memory_usage": 68,
+    "error_rate": 9,
+    "healthy_instances": 3,
+    "total_instances": 3,
+    "request_latency_ms": 820,
+    "requests_per_minute": 11100,
+    "database_connections": 62,
+    "redis_latency_ms": 280,
+    "status": "healthy"
+  },
+  {
+    "service": "Notification Service",
+    "cpu_usage": 76,
+    "memory_usage": 88,
+    "error_rate": 22,
+    "healthy_instances": 1,
+    "total_instances": 2,
+    "request_latency_ms": 3100,
+    "requests_per_minute": 7800,
+    "database_connections": 41,
+    "redis_latency_ms": 950,
+    "status": "degraded"
+  },
+  {
+    "service": "Redis",
+    "cpu_usage": 94,
+    "memory_usage": 92,
+    "error_rate": 27,
+    "healthy_instances": 1,
+    "total_instances": 2,
+    "request_latency_ms": 2800,
+    "requests_per_minute": 24000,
+    "database_connections": 0,
+    "redis_latency_ms": 2800,
+    "status": "critical"
+  },
+  {
+    "service": "PostgreSQL",
+    "cpu_usage": 89,
+    "memory_usage": 81,
+    "error_rate": 16,
+    "healthy_instances": 1,
+    "total_instances": 2,
+    "request_latency_ms": 2200,
+    "requests_per_minute": 13200,
+    "database_connections": 100,
+    "redis_latency_ms": 0,
+    "status": "degraded"
+  },
+  {
+    "service": "Kubernetes Cluster",
+    "cpu_usage": 74,
+    "memory_usage": 69,
+    "error_rate": 6,
+    "healthy_instances": 8,
+    "total_instances": 9,
+    "request_latency_ms": 420,
+    "requests_per_minute": 0,
+    "database_connections": 0,
+    "redis_latency_ms": 0,
+    "status": "healthy"
+  }
+]

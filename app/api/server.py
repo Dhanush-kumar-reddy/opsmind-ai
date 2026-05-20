@@ -1,9 +1,12 @@
 import traceback
 
 from fastapi import FastAPI
-from fastapi import HTTPException
 
 from app.graph.workflow import graph
+
+from app.models.incident_models import (
+    IncidentRequest
+)
 
 app = FastAPI()
 
@@ -18,40 +21,40 @@ def health_check():
 
 
 @app.post("/analyze")
-def analyze_incident(incident: dict):
+def analyze_incident(
+    incident: IncidentRequest
+):
 
     try:
 
         result = graph.invoke({
-            "incident": incident
+            "incident": incident.dict()
         })
-
-        if not isinstance(result, dict):
-
-            raise Exception(
-                "Workflow returned invalid result"
-            )
-
-        if "summary_result" not in result:
-
-            raise Exception(
-                "summary_result missing"
-            )
-
-        if "retrieval_result" not in result:
-
-            result["retrieval_result"] = {
-                "relevant_logs": [],
-                "relevant_docs": []
-            }
 
         return result
 
-    except Exception as error:
+    except Exception:
 
         traceback.print_exc()
 
-        raise HTTPException(
-            status_code=500,
-            detail=f"Workflow Failed: {error}"
-        )
+        return {
+            "summary_result": {
+                "incident_id": incident.incident_id,
+                "service": incident.service,
+                "severity": incident.severity,
+                "description": incident.description,
+                "errors_detected": 0,
+                "warnings_detected": 0,
+                "root_cause": "Unknown",
+                "impact": "Unknown",
+                "recommended_fix": (
+                    "Check backend logs"
+                ),
+                "confidence": "low",
+                "status": "failed"
+            },
+            "retrieval_result": {
+                "relevant_logs": [],
+                "relevant_docs": []
+            }
+        }

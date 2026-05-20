@@ -1,7 +1,83 @@
-2026-05-18 11:44:50 INFO PaymentService Deployment version v5.1.0 started
-2026-05-18 11:45:02 INFO PaymentService Payment request initiated
-2026-05-18 11:45:04 ERROR PaymentService DatabaseError column 'payment_status' does not exist
-2026-05-18 11:45:06 ERROR PaymentService Transaction rollback initiated
-2026-05-18 11:45:08 ERROR PaymentService Payment request failed with HTTP 500
-2026-05-18 11:45:10 WARNING PaymentService Retry attempt failed
-2026-05-18 11:45:12 ERROR PaymentService Service unhealthy
+2026-05-20 10:05:01 INFO PaymentService Deployment version=v5.8.0 started
+2026-05-20 10:05:04 INFO Kubernetes Pulled payment-api image successfully
+2026-05-20 10:05:07 INFO Kubernetes Created payment-api-pod-1
+2026-05-20 10:05:09 INFO Kubernetes Started payment-api-pod-1
+2026-05-20 10:05:12 INFO PaymentService Healthcheck passed pod=payment-api-pod-1
+2026-05-20 10:05:18 INFO PaymentService Payment request received request_id=pay_2001 user_id=user_884 amount=1299
+2026-05-20 10:05:19 INFO PaymentService Payment gateway connection established gateway=stripe
+2026-05-20 10:05:20 INFO PaymentService Transaction completed request_id=pay_2001 latency=310ms
+2026-05-20 10:05:26 INFO PaymentService Payment request received request_id=pay_2002 user_id=user_921 amount=499
+2026-05-20 10:05:27 INFO PaymentService Transaction completed request_id=pay_2002 latency=281ms
+2026-05-20 10:05:31 DEBUG PaymentService Kafka event published topic=payment-events
+2026-05-20 10:05:38 INFO PaymentService Refund request received request_id=refund_1001 order_id=ORD991
+2026-05-20 10:05:39 INFO PaymentService Refund processed successfully request_id=refund_1001
+2026-05-20 10:05:46 INFO PaymentService Payment request received request_id=pay_2003 user_id=user_321 amount=799
+2026-05-20 10:05:47 INFO PaymentService Transaction completed request_id=pay_2003 latency=295ms
+2026-05-20 10:05:52 INFO PaymentService Healthcheck passed pod=payment-api-pod-1
+2026-05-20 10:05:58 INFO PaymentService Payment request received request_id=pay_2004 user_id=user_199 amount=1499
+2026-05-20 10:05:59 INFO PaymentService Transaction completed request_id=pay_2004 latency=304ms
+2026-05-20 10:06:03 DEBUG PaymentService Database write completed table=transactions
+2026-05-20 10:06:11 INFO PaymentService Payment request received request_id=pay_2005 user_id=user_888 amount=299
+2026-05-20 10:06:12 INFO PaymentService Transaction completed request_id=pay_2005 latency=289ms
+2026-05-20 10:06:18 INFO PaymentService Payment request received request_id=pay_2006 user_id=user_672 amount=2199
+2026-05-20 10:06:19 INFO PaymentService Transaction completed request_id=pay_2006 latency=341ms
+2026-05-20 10:06:25 INFO PaymentService Healthcheck passed pod=payment-api-pod-1
+2026-05-20 10:06:31 WARNING PaymentService Payment gateway latency increased gateway=stripe latency=2100ms
+2026-05-20 10:06:34 WARNING PaymentService Retry initiated request_id=pay_2007 retry=1
+2026-05-20 10:06:36 INFO PaymentService Transaction completed request_id=pay_2007 latency=2420ms
+2026-05-20 10:06:42 WARNING PaymentService Payment gateway latency increased gateway=stripe latency=2800ms
+2026-05-20 10:06:45 INFO PaymentService Retry initiated request_id=pay_2008 retry=1
+2026-05-20 10:06:47 INFO PaymentService Transaction completed request_id=pay_2008 latency=3012ms
+2026-05-20 10:06:53 INFO PaymentService Payment request received request_id=pay_2009 user_id=user_512 amount=699
+2026-05-20 10:06:54 INFO PaymentService Transaction completed request_id=pay_2009 latency=298ms
+2026-05-20 10:07:01 INFO Deployment Rolling update initiated service=payment-api version=v5.8.1
+2026-05-20 10:07:04 INFO Kubernetes Terminated payment-api-pod-1
+2026-05-20 10:07:06 INFO Kubernetes Created payment-api-pod-2
+2026-05-20 10:07:08 INFO Kubernetes Started payment-api-pod-2
+2026-05-20 10:07:11 INFO PaymentService Healthcheck passed pod=payment-api-pod-2
+2026-05-20 10:07:15 INFO PaymentService Payment request received request_id=pay_2010 user_id=user_1001 amount=4599
+2026-05-20 10:07:17 WARNING PaymentService Database connection pool saturation detected
+2026-05-20 10:07:18 ERROR PaymentService Database transaction timeout request_id=pay_2010 timeout=5000ms
+2026-05-20 10:07:19 ERROR PaymentService Transaction failed request_id=pay_2010
+2026-05-20 10:07:20 ERROR PaymentService Payment processing failed request_id=pay_2010 status=500
+2026-05-20 10:07:25 WARNING PaymentService Circuit breaker opened downstream=postgres
+2026-05-20 10:07:31 ERROR PaymentService Database unavailable connection_refused=true
+2026-05-20 10:07:33 ERROR PaymentService Transaction rollback failed request_id=pay_2011
+2026-05-20 10:07:36 ERROR PaymentService Refund processing failed request_id=refund_1002
+2026-05-20 10:07:41 WARNING Kubernetes Pod memory usage high pod=payment-api-pod-2 memory=91%
+2026-05-20 10:07:46 INFO Kubernetes Restarted payment-api-pod-2
+2026-05-20 10:07:50 INFO PaymentService Healthcheck passed pod=payment-api-pod-2
+2026-05-20 10:07:55 INFO PaymentService Payment request received request_id=pay_2012 user_id=user_712 amount=1899
+2026-05-20 10:07:56 INFO PaymentService Transaction completed request_id=pay_2012 latency=331ms
+2026-05-20 10:08:01 INFO PaymentService Payment request received request_id=pay_2013 user_id=user_900 amount=999
+2026-05-20 10:08:02 INFO PaymentService Transaction completed request_id=pay_2013 latency=290ms
+2026-05-20 10:08:08 DEBUG PaymentService Kafka event published topic=payment-events
+2026-05-20 10:08:15 INFO PaymentService Healthcheck passed pod=payment-api-pod-2
+2026-05-18 11:15:08 INFO PaymentService Payment API deployment started
+2026-05-18 11:15:31 INFO PaymentService New payment workers registered successfully
+2026-05-18 11:15:52 INFO PaymentService Stripe gateway connection established
+2026-05-18 11:16:17 INFO PaymentService Incoming payment requests increasing
+2026-05-18 11:16:41 WARNING PaymentService Payment processing latency exceeded 900ms
+2026-05-18 11:17:06 WARNING PaymentService Retry queue growing rapidly
+2026-05-18 11:17:29 INFO PaymentService Payment worker autoscaling triggered
+2026-05-18 11:17:53 ERROR PaymentService Transaction validation timeout detected
+2026-05-18 11:18:14 WARNING PaymentService PostgreSQL query response delayed
+2026-05-18 11:18:39 ERROR PaymentService Failed to persist payment transaction
+2026-05-18 11:19:02 INFO PaymentService Retrying failed payment request
+2026-05-18 11:19:27 WARNING PaymentService Elevated API response latency detected
+2026-05-18 11:19:55 ERROR PaymentService External payment gateway returned 502 error
+2026-05-18 11:20:18 WARNING PaymentService Queue backlog exceeded threshold
+2026-05-18 11:20:46 ERROR PaymentService Database connection pool exhausted
+2026-05-18 11:21:09 INFO PaymentService Emergency traffic throttling enabled
+2026-05-18 11:21:34 WARNING PaymentService Transaction retry count increasing
+2026-05-18 11:21:58 ERROR PaymentService Payment authorization failed
+2026-05-18 11:22:21 INFO PaymentService Switching traffic to healthy worker nodes
+2026-05-18 11:22:47 WARNING PaymentService CPU usage exceeded 84 percent
+2026-05-18 11:23:11 ERROR PaymentService Failed transaction rollback detected
+2026-05-18 11:23:36 INFO PaymentService PostgreSQL replica responding normally
+2026-05-18 11:24:02 WARNING PaymentService Elevated request timeout rate detected
+2026-05-18 11:24:27 INFO PaymentService Queue backlog reducing gradually
+2026-05-18 11:24:54 INFO PaymentService Payment processing latency improving
+2026-05-18 11:25:19 INFO PaymentService Transaction success rate stabilizing
+2026-05-18 11:25:43 INFO PaymentService API health checks returning healthy
+2026-05-18 11:26:07 INFO PaymentService System recovery completed

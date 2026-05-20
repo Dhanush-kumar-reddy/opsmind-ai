@@ -1,8 +1,71 @@
-2026-05-18 10:11:58 INFO AuthService Deployment version v2.4.1 started
-2026-05-18 10:12:01 INFO AuthService Login request received
-2026-05-18 10:12:03 WARNING AuthService Redis response delayed
-2026-05-18 10:12:05 ERROR AuthService Redis connection failed
-2026-05-18 10:12:07 ERROR AuthService Session creation failed
-2026-05-18 10:12:09 ERROR AuthService User authentication failed
-2026-05-18 10:12:11 WARNING AuthService Retry attempt failed
-2026-05-18 10:12:13 ERROR AuthService Login request terminated
+2026-05-20 09:58:01 INFO AuthService Deployment version=v2.4.1 started
+2026-05-20 09:58:04 INFO Kubernetes Pulled auth-api image successfully
+2026-05-20 09:58:06 INFO Kubernetes Created auth-api-pod-1
+2026-05-20 09:58:08 INFO Kubernetes Started auth-api-pod-1
+2026-05-20 09:58:11 INFO AuthService Healthcheck passed pod=auth-api-pod-1
+2026-05-20 09:58:15 INFO AuthService Login request received request_id=req_1001 user_id=user_1201
+2026-05-20 09:58:15 INFO AuthService JWT validation successful request_id=req_1001
+2026-05-20 09:58:16 INFO AuthService Session created request_id=req_1001 latency=82ms
+2026-05-20 09:58:18 INFO AuthService Login request received request_id=req_1002 user_id=user_9842
+2026-05-20 09:58:18 INFO AuthService JWT validation successful request_id=req_1002
+2026-05-20 09:58:18 INFO AuthService Session created request_id=req_1002 latency=75ms
+2026-05-20 09:58:21 DEBUG AuthService Redis cache lookup request_id=req_1003 cache_key=session_user_882
+2026-05-20 09:58:22 INFO AuthService Login request received request_id=req_1003 user_id=user_882
+2026-05-20 09:58:22 INFO AuthService Session created request_id=req_1003 latency=91ms
+2026-05-20 09:58:26 INFO AuthService Token refresh request_id=req_1004 user_id=user_2291
+2026-05-20 09:58:26 INFO AuthService Refresh token validated request_id=req_1004
+2026-05-20 09:58:27 INFO AuthService Session updated request_id=req_1004 latency=63ms
+2026-05-20 09:58:31 INFO AuthService Login request received request_id=req_1005 user_id=user_5123
+2026-05-20 09:58:31 INFO AuthService Session created request_id=req_1005 latency=72ms
+2026-05-20 09:58:35 INFO AuthService Login request received request_id=req_1006 user_id=user_8881
+2026-05-20 09:58:35 INFO AuthService Session created request_id=req_1006 latency=78ms
+2026-05-20 09:58:41 DEBUG AuthService Redis heartbeat successful node=redis-primary-1
+2026-05-20 09:58:45 INFO AuthService Login request received request_id=req_1007 user_id=user_6611
+2026-05-20 09:58:45 INFO AuthService Session created request_id=req_1007 latency=80ms
+2026-05-20 09:58:49 INFO AuthService Login request received request_id=req_1008 user_id=user_7721
+2026-05-20 09:58:49 INFO AuthService Session created request_id=req_1008 latency=73ms
+2026-05-20 09:58:55 INFO AuthService Healthcheck passed pod=auth-api-pod-1
+2026-05-20 09:59:02 INFO AuthService Login request received request_id=req_1009 user_id=user_9931
+2026-05-20 09:59:02 INFO AuthService Session created request_id=req_1009 latency=84ms
+2026-05-20 09:59:08 INFO AuthService Login request received request_id=req_1010 user_id=user_3001
+2026-05-20 09:59:08 INFO AuthService Session created request_id=req_1010 latency=67ms
+2026-05-20 09:59:15 DEBUG AuthService Redis cache write request_id=req_1011 cache_key=session_user_778
+2026-05-20 09:59:15 INFO AuthService Session created request_id=req_1011 latency=77ms
+2026-05-20 09:59:22 INFO AuthService Login request received request_id=req_1012 user_id=user_8112
+2026-05-20 09:59:22 INFO AuthService Session created request_id=req_1012 latency=81ms
+2026-05-20 09:59:31 WARNING AuthService Redis response delayed request_id=req_1013 latency=1200ms
+2026-05-20 09:59:33 INFO AuthService Retry initiated request_id=req_1013 retry=1
+2026-05-20 09:59:34 INFO AuthService Session created request_id=req_1013 latency=1450ms
+2026-05-20 09:59:39 WARNING AuthService Redis response delayed request_id=req_1014 latency=1900ms
+2026-05-20 09:59:41 INFO AuthService Retry initiated request_id=req_1014 retry=1
+2026-05-20 09:59:42 INFO AuthService Session created request_id=req_1014 latency=2100ms
+2026-05-20 09:59:49 INFO AuthService Login request received request_id=req_1015 user_id=user_9231
+2026-05-20 09:59:49 INFO AuthService Session created request_id=req_1015 latency=89ms
+2026-05-20 10:00:01 INFO Deployment Rolling update initiated service=auth-api version=v2.4.2
+2026-05-20 10:00:04 INFO Kubernetes Terminated auth-api-pod-1
+2026-05-20 10:00:06 INFO Kubernetes Created auth-api-pod-2
+2026-05-20 10:00:08 INFO Kubernetes Started auth-api-pod-2
+2026-05-20 10:00:11 INFO AuthService Healthcheck passed pod=auth-api-pod-2
+2026-05-20 10:00:18 INFO AuthService Login request received request_id=req_1016 user_id=user_1191
+2026-05-20 10:00:18 INFO AuthService Session created request_id=req_1016 latency=86ms
+2026-05-20 10:00:22 WARNING AuthService Redis response delayed request_id=req_1017 latency=2300ms
+2026-05-20 10:00:24 ERROR AuthService Redis connection failed request_id=req_1017 retry=1
+2026-05-20 10:00:25 WARNING AuthService Retry attempt failed request_id=req_1017 retry=2
+2026-05-20 10:00:27 ERROR AuthService Session creation failed request_id=req_1017
+2026-05-20 10:00:28 ERROR AuthService User authentication failed request_id=req_1017 status=500
+2026-05-20 10:00:31 ERROR AuthService Login request terminated request_id=req_1017
+2026-05-20 10:00:36 WARNING AuthService Redis response delayed request_id=req_1018 latency=2800ms
+2026-05-20 10:00:38 ERROR AuthService Redis timeout request_id=req_1018 timeout=3000ms
+2026-05-20 10:00:39 ERROR AuthService Session creation failed request_id=req_1018
+2026-05-20 10:00:41 ERROR AuthService User authentication failed request_id=req_1018 status=500
+2026-05-20 10:00:43 WARNING Kubernetes Pod restart detected pod=auth-api-pod-2
+2026-05-20 10:00:46 INFO Kubernetes Restarted auth-api-pod-2
+2026-05-20 10:00:49 INFO AuthService Healthcheck passed pod=auth-api-pod-2
+2026-05-20 10:00:53 INFO AuthService Login request received request_id=req_1019 user_id=user_5531
+2026-05-20 10:00:53 INFO AuthService Session created request_id=req_1019 latency=92ms
+2026-05-20 10:00:58 INFO AuthService Login request received request_id=req_1020 user_id=user_9922
+2026-05-20 10:00:58 INFO AuthService Session created request_id=req_1020 latency=83ms
+2026-05-20 10:01:03 DEBUG AuthService Redis heartbeat successful node=redis-primary-1
+2026-05-20 10:01:09 INFO AuthService Login request received request_id=req_1021 user_id=user_8882
+2026-05-20 10:01:09 INFO AuthService Session created request_id=req_1021 latency=74ms
+2026-05-20 10:01:15 INFO AuthService Healthcheck passed pod=auth-api-pod-2

@@ -1,0 +1,71 @@
+2026-05-20 11:20:01 INFO NotificationService Deployment version=v1.9.4 started
+2026-05-20 11:20:05 INFO Kubernetes Pulled notification-service image successfully
+2026-05-20 11:20:08 INFO Kubernetes Created notification-pod-1
+2026-05-20 11:20:11 INFO Kubernetes Started notification-pod-1
+2026-05-20 11:20:15 INFO NotificationService Healthcheck passed pod=notification-pod-1
+2026-05-20 11:20:21 INFO NotificationService Email notification queued notification_id=notif_1001
+2026-05-20 11:20:24 INFO NotificationService Email delivered notification_id=notif_1001 latency=410ms
+2026-05-20 11:20:29 INFO NotificationService SMS notification queued notification_id=notif_1002
+2026-05-20 11:20:31 INFO NotificationService SMS delivered notification_id=notif_1002 latency=280ms
+2026-05-20 11:20:36 DEBUG NotificationService Kafka consumer polled topic=user-events
+2026-05-20 11:20:42 INFO NotificationService Push notification queued notification_id=notif_1003
+2026-05-20 11:20:45 INFO NotificationService Push notification delivered notification_id=notif_1003 latency=350ms
+2026-05-20 11:20:52 INFO NotificationService Healthcheck passed pod=notification-pod-1
+2026-05-20 11:20:58 INFO NotificationService Email notification queued notification_id=notif_1004
+2026-05-20 11:21:01 INFO NotificationService Email delivered notification_id=notif_1004 latency=392ms
+2026-05-20 11:21:07 DEBUG NotificationService Redis cache lookup key=user_preferences_221
+2026-05-20 11:21:12 INFO NotificationService SMS notification queued notification_id=notif_1005
+2026-05-20 11:21:15 INFO NotificationService SMS delivered notification_id=notif_1005 latency=261ms
+2026-05-20 11:21:22 INFO NotificationService Healthcheck passed pod=notification-pod-1
+2026-05-20 11:21:28 WARNING NotificationService Kafka consumer lag detected lag=4200
+2026-05-20 11:21:33 WARNING NotificationService Queue processing delayed queue=email_notifications
+2026-05-20 11:21:39 WARNING NotificationService Redis response delayed latency=1900ms
+2026-05-20 11:21:45 ERROR NotificationService Failed sending email notification_id=notif_1006 provider=smtp-primary
+2026-05-20 11:21:49 WARNING NotificationService Retry initiated notification_id=notif_1006 retry=1
+2026-05-20 11:21:54 ERROR NotificationService Retry delivery failed notification_id=notif_1006
+2026-05-20 11:21:59 ERROR NotificationService Dead letter queue push failed notification_id=notif_1006
+2026-05-20 11:22:04 WARNING Kubernetes Pod memory usage elevated pod=notification-pod-1 memory=89%
+2026-05-20 11:22:09 WARNING NotificationService SMS gateway latency increased latency=2800ms
+2026-05-20 11:22:14 ERROR NotificationService SMS provider timeout provider=twilio
+2026-05-20 11:22:19 ERROR NotificationService Push notification failed provider=firebase
+2026-05-20 11:22:25 WARNING NotificationService Circuit breaker opened downstream=notification-provider
+2026-05-20 11:22:31 ERROR NotificationService Queue backlog spike queued_messages=8800
+2026-05-20 11:22:36 WARNING Kubernetes Restart triggered pod=notification-pod-1
+2026-05-20 11:22:42 INFO Kubernetes Notification pod terminated notification-pod-1
+2026-05-20 11:22:47 INFO Kubernetes Notification pod recreated notification-pod-2
+2026-05-20 11:22:52 INFO Kubernetes Started notification-pod-2
+2026-05-20 11:22:57 INFO NotificationService Recovery process started
+2026-05-20 11:23:02 INFO NotificationService Queue processing resumed
+2026-05-20 11:23:07 INFO NotificationService Kafka lag reduced lag=210
+2026-05-20 11:23:13 INFO NotificationService Healthcheck passed pod=notification-pod-2
+2026-05-20 11:23:18 INFO NotificationService Email notification queued notification_id=notif_1007
+2026-05-20 11:23:21 INFO NotificationService Email delivered notification_id=notif_1007 latency=398ms
+2026-05-20 11:23:27 INFO NotificationService SMS notification queued notification_id=notif_1008
+2026-05-20 11:23:30 INFO NotificationService SMS delivered notification_id=notif_1008 latency=274ms
+2026-05-20 11:23:36 DEBUG NotificationService Kafka consumer normalized topic=user-events
+2026-05-20 11:23:42 INFO NotificationService Operations normalized status=healthy
+2026-05-18 12:05:14 INFO NotificationService Notification workers initialized
+2026-05-18 12:05:39 INFO NotificationService Email delivery queue connected
+2026-05-18 12:06:03 INFO NotificationService Push notification gateway authenticated
+2026-05-18 12:06:28 INFO NotificationService SMS provider health checks passed
+2026-05-18 12:06:54 WARNING NotificationService Notification queue latency exceeded threshold
+2026-05-18 12:07:19 WARNING NotificationService Delayed email delivery detected
+2026-05-18 12:07:46 INFO NotificationService Autoscaling additional notification workers
+2026-05-18 12:08:11 ERROR NotificationService Failed to deliver push notification
+2026-05-18 12:08:37 WARNING NotificationService External email provider response delayed
+2026-05-18 12:09:02 ERROR NotificationService Queue persistence timeout occurred
+2026-05-18 12:09:26 INFO NotificationService Retrying failed notification jobs
+2026-05-18 12:09:51 WARNING NotificationService Worker memory usage exceeded 82 percent
+2026-05-18 12:10:17 ERROR NotificationService Notification retry queue saturation detected
+2026-05-18 12:10:44 WARNING NotificationService Increased notification processing latency
+2026-05-18 12:11:09 ERROR NotificationService Failed webhook callback delivery
+2026-05-18 12:11:36 INFO NotificationService Redirecting workload to healthy workers
+2026-05-18 12:12:01 WARNING NotificationService Elevated API timeout rate observed
+2026-05-18 12:12:28 ERROR NotificationService Notification dispatch failure detected
+2026-05-18 12:12:53 INFO NotificationService Queue cleanup initiated
+2026-05-18 12:13:18 WARNING NotificationService Email retry attempts increasing
+2026-05-18 12:13:44 INFO NotificationService Provider latency gradually improving
+2026-05-18 12:14:08 WARNING NotificationService Notification backlog still elevated
+2026-05-18 12:14:36 INFO NotificationService Worker recovery completed
+2026-05-18 12:15:02 INFO NotificationService Queue throughput stabilized
+2026-05-18 12:15:27 INFO NotificationService Notification system health restored

@@ -1,0 +1,73 @@
+2026-05-20 10:20:01 INFO Redis Server starting version=7.2.1
+2026-05-20 10:20:04 INFO Redis Loading persistence data from disk
+2026-05-20 10:20:08 INFO Redis Ready to accept connections port=6379
+2026-05-20 10:20:13 INFO Redis Connected client service=auth-api
+2026-05-20 10:20:18 INFO Redis Connected client service=payment-api
+2026-05-20 10:20:23 INFO Redis Connected client service=order-api
+2026-05-20 10:20:29 DEBUG Redis Cache hit key=session_user_882
+2026-05-20 10:20:34 DEBUG Redis Cache hit key=session_user_190
+2026-05-20 10:20:39 DEBUG Redis Cache miss key=session_user_551
+2026-05-20 10:20:44 INFO Redis Replication status healthy replicas=2
+2026-05-20 10:20:51 INFO Redis Background save started
+2026-05-20 10:20:57 INFO Redis Background save completed duration=6s
+2026-05-20 10:21:04 INFO Redis Memory usage stable memory=61%
+2026-05-20 10:21:11 DEBUG Redis Cache write key=session_user_998
+2026-05-20 10:21:17 DEBUG Redis Cache write key=session_user_441
+2026-05-20 10:21:23 INFO Redis Connected client service=notification-service
+2026-05-20 10:21:29 INFO Redis Healthcheck passed node=redis-primary-1
+2026-05-20 10:21:36 WARNING Redis Network latency increased latency=1800ms
+2026-05-20 10:21:41 WARNING Redis Slow command detected command=GET duration=2100ms
+2026-05-20 10:21:47 WARNING Redis Connection queue increasing queued_connections=92
+2026-05-20 10:21:53 WARNING Redis Memory usage elevated memory=84%
+2026-05-20 10:21:58 ERROR Redis Replication lag detected lag=12s
+2026-05-20 10:22:03 ERROR Redis Connection timeout client=auth-api
+2026-05-20 10:22:07 ERROR Redis Failed serving request command=SET key=session_user_112
+2026-05-20 10:22:12 ERROR Redis Client disconnected unexpectedly service=auth-api
+2026-05-20 10:22:17 WARNING Redis Retry connection initiated client=auth-api retry=1
+2026-05-20 10:22:22 ERROR Redis OOM prevention triggered maxmemory_policy=allkeys-lru
+2026-05-20 10:22:28 ERROR Redis Cache eviction spike evicted_keys=1200
+2026-05-20 10:22:34 WARNING Redis CPU usage high cpu=93%
+2026-05-20 10:22:39 ERROR Redis Primary node unresponsive node=redis-primary-1
+2026-05-20 10:22:45 WARNING Kubernetes Restart triggered pod=redis-primary-1
+2026-05-20 10:22:52 INFO Kubernetes Redis pod terminated redis-primary-1
+2026-05-20 10:22:58 INFO Kubernetes Redis pod recreated redis-primary-2
+2026-05-20 10:23:04 INFO Redis Loading persistence data from disk
+2026-05-20 10:23:11 INFO Redis Recovery completed recovery_time=13s
+2026-05-20 10:23:17 INFO Redis Replication restored replicas=2
+2026-05-20 10:23:23 INFO Redis Healthcheck passed node=redis-primary-2
+2026-05-20 10:23:29 INFO Redis Connected client service=auth-api
+2026-05-20 10:23:34 INFO Redis Connected client service=payment-api
+2026-05-20 10:23:39 INFO Redis Connected client service=order-api
+2026-05-20 10:23:45 DEBUG Redis Cache hit key=session_user_901
+2026-05-20 10:23:50 DEBUG Redis Cache hit key=session_user_111
+2026-05-20 10:23:56 INFO Redis Background save started
+2026-05-20 10:24:02 INFO Redis Background save completed duration=6s
+2026-05-20 10:24:08 INFO Redis Memory usage stable memory=64%
+2026-05-20 10:24:14 INFO Redis Operations normalized status=healthy
+2026-05-18 08:55:12 INFO Redis Redis primary node boot sequence started
+2026-05-18 08:55:36 INFO Redis Replica synchronization initiated
+2026-05-18 08:56:01 INFO Redis Cluster heartbeat healthy
+2026-05-18 08:56:27 INFO Redis Accepting client connections
+2026-05-18 08:56:52 WARNING Redis Cache memory utilization exceeded 80 percent
+2026-05-18 08:57:18 WARNING Redis Elevated command execution latency detected
+2026-05-18 08:57:46 INFO Redis Replica sync operation continuing
+2026-05-18 08:58:09 ERROR Redis Client connection timeout detected
+2026-05-18 08:58:33 WARNING Redis Cache eviction rate increasing rapidly
+2026-05-18 08:58:57 ERROR Redis Replication synchronization interrupted
+2026-05-18 08:59:22 INFO Redis Automatic failover initiated
+2026-05-18 08:59:46 WARNING Redis Network packet delay detected between nodes
+2026-05-18 09:00:11 ERROR Redis Max client connection threshold reached
+2026-05-18 09:00:39 WARNING Redis Session token lookup latency exceeded threshold
+2026-05-18 09:01:04 ERROR Redis Authentication cache retrieval failed
+2026-05-18 09:01:29 INFO Redis Restarting unhealthy replica node
+2026-05-18 09:01:56 WARNING Redis Cache persistence operation delayed
+2026-05-18 09:02:18 ERROR Redis Redis connection refused for auth-service
+2026-05-18 09:02:42 WARNING Redis Retry queue buildup increasing
+2026-05-18 09:03:07 INFO Redis Failover validation completed
+2026-05-18 09:03:33 WARNING Redis Elevated Redis latency persists
+2026-05-18 09:03:58 ERROR Redis Distributed lock acquisition failed
+2026-05-18 09:04:26 INFO Redis Replica synchronization restored
+2026-05-18 09:04:51 WARNING Redis Connection pool saturation still elevated
+2026-05-18 09:05:17 INFO Redis Cache hit ratio recovering gradually
+2026-05-18 09:05:44 INFO Redis Authentication session retrieval stabilizing
+2026-05-18 09:06:08 INFO Redis Cluster health restored successfully

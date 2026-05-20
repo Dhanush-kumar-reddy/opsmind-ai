@@ -1,0 +1,90 @@
+[
+  {
+    "incident_id": "INC-2026-0401",
+    "service": "Auth API",
+    "severity": "High",
+    "description": "Users unable to login after Redis failover",
+    "root_cause": "Redis replica synchronization failure",
+    "impact": "Authentication requests timing out",
+    "recommended_fix": "Restart Redis replicas and clear stale connections",
+    "confidence": "high",
+    "status": "resolved"
+  },
+  {
+    "incident_id": "INC-2026-0408",
+    "service": "Payment API",
+    "severity": "Critical",
+    "description": "Payment processing failing during PostgreSQL latency spike",
+    "root_cause": "Database connection pool exhaustion",
+    "impact": "Payment transactions timing out",
+    "recommended_fix": "Scale PostgreSQL replicas and optimize connection pooling",
+    "confidence": "high",
+    "status": "resolved"
+  },
+  {
+    "incident_id": "INC-2026-0412",
+    "service": "Order API",
+    "severity": "High",
+    "description": "Order queue backlog increasing rapidly",
+    "root_cause": "Kafka consumer rebalance instability",
+    "impact": "Delayed order processing",
+    "recommended_fix": "Restart Kafka consumers and rebalance partitions",
+    "confidence": "medium",
+    "status": "resolved"
+  },
+  {
+    "incident_id": "INC-2026-0419",
+    "service": "Notification Service",
+    "severity": "Medium",
+    "description": "Delayed email delivery for customer notifications",
+    "root_cause": "External SMTP provider latency",
+    "impact": "Notification delays",
+    "recommended_fix": "Switch traffic to backup SMTP provider",
+    "confidence": "medium",
+    "status": "resolved"
+  },
+  {
+    "incident_id": "INC-2026-0424",
+    "service": "Kubernetes Cluster",
+    "severity": "Critical",
+    "description": "Pod restart storm after deployment rollout",
+    "root_cause": "Failed readiness probes during autoscaling",
+    "impact": "Production API instability",
+    "recommended_fix": "Rollback deployment and tune probe configuration",
+    "confidence": "high",
+    "status": "resolved"
+  },
+  {
+    "incident_id": "INC-2026-0502",
+    "service": "API Gateway",
+    "severity": "High",
+    "description": "502 Bad Gateway errors increasing rapidly",
+    "root_cause": "Upstream auth-service timeout",
+    "impact": "Login requests failing intermittently",
+    "recommended_fix": "Scale auth-service replicas and reduce retry amplification",
+    "confidence": "high",
+    "status": "resolved"
+  },
+  {
+    "incident_id": "INC-2026-0508",
+    "service": "Redis",
+    "severity": "Critical",
+    "description": "Redis cluster latency exceeded safe operational threshold",
+    "root_cause": "Memory saturation and connection pool exhaustion",
+    "impact": "Authentication and session instability",
+    "recommended_fix": "Scale Redis cluster horizontally and clear unhealthy clients",
+    "confidence": "high",
+    "status": "resolved"
+  },
+  {
+    "incident_id": "INC-2026-0511",
+    "service": "PostgreSQL",
+    "severity": "High",
+    "description": "Database replication lag affecting API response time",
+    "root_cause": "Replica synchronization interruption",
+    "impact": "Elevated transaction latency",
+    "recommended_fix": "Restart replicas and validate WAL synchronization",
+    "confidence": "high",
+    "status": "resolved"
+  }
+]

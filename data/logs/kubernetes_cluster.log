@@ -1,0 +1,29 @@
+2026-05-18 09:40:12 INFO KubernetesCluster Node worker-node-1 registered successfully
+2026-05-18 09:40:28 INFO KubernetesCluster Node worker-node-2 registered successfully
+2026-05-18 09:41:02 INFO KubernetesCluster Horizontal Pod Autoscaler enabled for auth-service
+2026-05-18 09:41:26 INFO KubernetesCluster Deployment auth-service-v2 rollout started
+2026-05-18 09:41:48 INFO KubernetesCluster Pulling container image auth-service:v2.4.1
+2026-05-18 09:42:10 INFO KubernetesCluster Container image pulled successfully
+2026-05-18 09:42:39 INFO KubernetesCluster Starting rolling deployment for auth-service
+2026-05-18 09:43:05 WARNING KubernetesCluster Pod auth-service-5f4d7 restart count increasing
+2026-05-18 09:43:21 WARNING KubernetesCluster Readiness probe failed for auth-service pod
+2026-05-18 09:43:47 ERROR KubernetesCluster Pod auth-service-5f4d7 entered CrashLoopBackOff
+2026-05-18 09:44:02 WARNING KubernetesCluster Node worker-node-2 CPU usage exceeded 88 percent
+2026-05-18 09:44:20 WARNING KubernetesCluster Autoscaler requested additional replicas
+2026-05-18 09:44:42 ERROR KubernetesCluster Failed scheduling pod due to insufficient memory
+2026-05-18 09:45:01 INFO KubernetesCluster Scaling node pool initiated
+2026-05-18 09:45:18 WARNING KubernetesCluster API server latency increased above threshold
+2026-05-18 09:45:36 ERROR KubernetesCluster auth-service deployment rollout paused
+2026-05-18 09:45:58 WARNING KubernetesCluster Container restart rate increasing rapidly
+2026-05-18 09:46:14 ERROR KubernetesCluster worker-node-2 entered NotReady state
+2026-05-18 09:46:37 INFO KubernetesCluster Kubernetes scheduler retrying failed workloads
+2026-05-18 09:47:03 WARNING KubernetesCluster Multiple pods waiting for scheduling
+2026-05-18 09:47:28 ERROR KubernetesCluster Failed liveness probe for auth-service pod
+2026-05-18 09:47:55 INFO KubernetesCluster ReplicaSet recreated unhealthy auth-service pods
+2026-05-18 09:48:12 WARNING KubernetesCluster Traffic spike detected during deployment
+2026-05-18 09:48:41 ERROR KubernetesCluster Deployment exceeded rollout timeout threshold
+2026-05-18 09:49:06 INFO KubernetesCluster Node worker-node-3 added to cluster
+2026-05-18 09:49:24 INFO KubernetesCluster New workloads scheduled successfully
+2026-05-18 09:49:47 WARNING KubernetesCluster Elevated latency persists for auth-service
+2026-05-18 09:50:15 INFO KubernetesCluster Cluster resource utilization stabilizing
+2026-05-18 09:50:44 INFO KubernetesCluster Deployment recovery completed

@@ -1,0 +1,45 @@
+2026-05-20 10:40:01 INFO PostgreSQL Server starting version=16.1
+2026-05-20 10:40:05 INFO PostgreSQL Database recovery completed
+2026-05-20 10:40:09 INFO PostgreSQL Ready to accept connections port=5432
+2026-05-20 10:40:14 INFO PostgreSQL Connection established service=auth-api
+2026-05-20 10:40:18 INFO PostgreSQL Connection established service=payment-api
+2026-05-20 10:40:23 INFO PostgreSQL Connection established service=order-api
+2026-05-20 10:40:29 DEBUG PostgreSQL Query executed duration=42ms table=users
+2026-05-20 10:40:34 DEBUG PostgreSQL Query executed duration=38ms table=transactions
+2026-05-20 10:40:39 DEBUG PostgreSQL Query executed duration=51ms table=orders
+2026-05-20 10:40:45 INFO PostgreSQL Checkpoint completed
+2026-05-20 10:40:52 INFO PostgreSQL WAL archive successful
+2026-05-20 10:40:58 INFO PostgreSQL Replication healthy replicas=2
+2026-05-20 10:41:03 DEBUG PostgreSQL Query executed duration=61ms table=sessions
+2026-05-20 10:41:09 DEBUG PostgreSQL Query executed duration=47ms table=payments
+2026-05-20 10:41:15 INFO PostgreSQL Background vacuum started
+2026-05-20 10:41:21 INFO PostgreSQL Background vacuum completed duration=6s
+2026-05-20 10:41:28 INFO PostgreSQL Connection pool healthy active_connections=41
+2026-05-20 10:41:34 INFO PostgreSQL Healthcheck passed node=postgres-primary-1
+2026-05-20 10:41:39 WARNING PostgreSQL Slow query detected duration=2400ms table=transactions
+2026-05-20 10:41:45 WARNING PostgreSQL Connection pool usage elevated usage=84%
+2026-05-20 10:41:52 WARNING PostgreSQL Transaction queue increasing queued_transactions=120
+2026-05-20 10:41:58 ERROR PostgreSQL Deadlock detected transaction_id=txn_8821
+2026-05-20 10:42:04 ERROR PostgreSQL Transaction rollback executed transaction_id=txn_8821
+2026-05-20 10:42:09 WARNING PostgreSQL Replication lag detected lag=9s
+2026-05-20 10:42:15 ERROR PostgreSQL Connection timeout service=payment-api
+2026-05-20 10:42:21 ERROR PostgreSQL Failed query execution table=transactions
+2026-05-20 10:42:27 ERROR PostgreSQL Remaining connection slots exhausted
+2026-05-20 10:42:33 WARNING PostgreSQL CPU usage high cpu=91%
+2026-05-20 10:42:39 WARNING PostgreSQL Disk I/O latency increased latency=3100ms
+2026-05-20 10:42:45 ERROR PostgreSQL Primary node unresponsive node=postgres-primary-1
+2026-05-20 10:42:52 WARNING Kubernetes Restart triggered pod=postgres-primary-1
+2026-05-20 10:42:58 INFO Kubernetes PostgreSQL pod terminated postgres-primary-1
+2026-05-20 10:43:05 INFO Kubernetes PostgreSQL pod recreated postgres-primary-2
+2026-05-20 10:43:11 INFO PostgreSQL Recovery process started
+2026-05-20 10:43:18 INFO PostgreSQL WAL replay completed
+2026-05-20 10:43:24 INFO PostgreSQL Recovery completed successfully
+2026-05-20 10:43:31 INFO PostgreSQL Replication restored replicas=2
+2026-05-20 10:43:37 INFO PostgreSQL Healthcheck passed node=postgres-primary-2
+2026-05-20 10:43:42 INFO PostgreSQL Connection established service=payment-api
+2026-05-20 10:43:48 INFO PostgreSQL Connection established service=order-api
+2026-05-20 10:43:53 DEBUG PostgreSQL Query executed duration=44ms table=orders
+2026-05-20 10:43:59 DEBUG PostgreSQL Query executed duration=41ms table=transactions
+2026-05-20 10:44:05 INFO PostgreSQL Checkpoint completed
+2026-05-20 10:44:12 INFO PostgreSQL WAL archive successful
+2026-05-20 10:44:18 INFO PostgreSQL Operations normalized status=healthy

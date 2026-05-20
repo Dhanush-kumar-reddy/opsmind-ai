@@ -1,0 +1,48 @@
+2026-05-20 11:00:01 INFO Kubernetes Cluster autoscaler initialized cluster=prod-cluster
+2026-05-20 11:00:05 INFO Kubernetes Node registered node=worker-node-1
+2026-05-20 11:00:09 INFO Kubernetes Node registered node=worker-node-2
+2026-05-20 11:00:14 INFO Kubernetes Scheduler started
+2026-05-20 11:00:18 INFO Kubernetes Deployment created service=auth-api replicas=3
+2026-05-20 11:00:23 INFO Kubernetes Deployment created service=payment-api replicas=3
+2026-05-20 11:00:27 INFO Kubernetes Deployment created service=order-api replicas=2
+2026-05-20 11:00:33 INFO Kubernetes Pod started pod=auth-api-pod-1
+2026-05-20 11:00:37 INFO Kubernetes Pod started pod=auth-api-pod-2
+2026-05-20 11:00:42 INFO Kubernetes Pod started pod=payment-api-pod-1
+2026-05-20 11:00:46 INFO Kubernetes Pod started pod=payment-api-pod-2
+2026-05-20 11:00:51 INFO Kubernetes Pod started pod=order-api-pod-1
+2026-05-20 11:00:57 INFO Kubernetes Healthcheck passed pod=auth-api-pod-1
+2026-05-20 11:01:03 INFO Kubernetes Healthcheck passed pod=payment-api-pod-1
+2026-05-20 11:01:08 INFO Kubernetes Healthcheck passed pod=order-api-pod-1
+2026-05-20 11:01:14 DEBUG Kubernetes Metrics collection successful node=worker-node-1
+2026-05-20 11:01:19 DEBUG Kubernetes Metrics collection successful node=worker-node-2
+2026-05-20 11:01:25 INFO Kubernetes HorizontalPodAutoscaler monitoring service=auth-api
+2026-05-20 11:01:31 INFO Kubernetes HorizontalPodAutoscaler monitoring service=payment-api
+2026-05-20 11:01:38 WARNING Kubernetes Pod CPU usage elevated pod=auth-api-pod-2 cpu=88%
+2026-05-20 11:01:44 WARNING Kubernetes Pod memory usage elevated pod=payment-api-pod-1 memory=86%
+2026-05-20 11:01:49 INFO Kubernetes Autoscaling initiated service=auth-api new_replicas=4
+2026-05-20 11:01:55 INFO Kubernetes New pod scheduled pod=auth-api-pod-4
+2026-05-20 11:02:01 INFO Kubernetes Pod started pod=auth-api-pod-4
+2026-05-20 11:02:06 INFO Kubernetes Healthcheck passed pod=auth-api-pod-4
+2026-05-20 11:02:12 WARNING Kubernetes Readiness probe delayed pod=payment-api-pod-1
+2026-05-20 11:02:17 WARNING Kubernetes Liveness probe failed pod=payment-api-pod-1
+2026-05-20 11:02:22 ERROR Kubernetes CrashLoopBackOff detected pod=payment-api-pod-1
+2026-05-20 11:02:27 ERROR Kubernetes Container restart initiated pod=payment-api-pod-1
+2026-05-20 11:02:33 WARNING Kubernetes Node resource pressure detected node=worker-node-2
+2026-05-20 11:02:38 ERROR Kubernetes Pod eviction triggered pod=payment-api-pod-1
+2026-05-20 11:02:44 INFO Kubernetes Replacement pod scheduled pod=payment-api-pod-3
+2026-05-20 11:02:49 INFO Kubernetes Pod started pod=payment-api-pod-3
+2026-05-20 11:02:54 INFO Kubernetes Healthcheck passed pod=payment-api-pod-3
+2026-05-20 11:03:01 WARNING Kubernetes API server latency elevated latency=1900ms
+2026-05-20 11:03:07 WARNING Kubernetes etcd response delayed latency=2100ms
+2026-05-20 11:03:12 ERROR Kubernetes Failed scheduling pod=order-api-pod-3 insufficient_cpu=true
+2026-05-20 11:03:18 INFO Kubernetes Cluster autoscaler adding node=node-worker-3
+2026-05-20 11:03:24 INFO Kubernetes Node registered node=worker-node-3
+2026-05-20 11:03:29 INFO Kubernetes Pod scheduled pod=order-api-pod-3
+2026-05-20 11:03:34 INFO Kubernetes Pod started pod=order-api-pod-3
+2026-05-20 11:03:39 INFO Kubernetes Healthcheck passed pod=order-api-pod-3
+2026-05-20 11:03:45 WARNING Kubernetes Network packet drops detected node=worker-node-2
+2026-05-20 11:03:51 ERROR Kubernetes Service communication timeout service=auth-api
+2026-05-20 11:03:56 WARNING Kubernetes Retry initiated service_mesh_retry=1
+2026-05-20 11:04:02 INFO Kubernetes Service communication restored service=auth-api
+2026-05-20 11:04:08 INFO Kubernetes Cluster status healthy
+2026-05-20 11:04:13 INFO Kubernetes Resource utilization normalized

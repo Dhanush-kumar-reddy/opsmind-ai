@@ -1,7 +1,75 @@
-2026-05-18 13:09:40 INFO OrderService Queue listener started
-2026-05-18 13:09:45 WARNING OrderService Message queue latency increased
-2026-05-18 13:09:48 WARNING OrderService Queue backlog threshold exceeded
-2026-05-18 13:09:52 ERROR OrderService Worker timeout detected
-2026-05-18 13:09:56 WARNING OrderService Processing delayed
-2026-05-18 13:10:00 INFO OrderService Auto scaling triggered
-2026-05-18 13:10:04 INFO OrderService Additional workers added
+2026-05-20 11:10:01 INFO OrderService Deployment version=v3.4.2 started
+2026-05-20 11:10:04 INFO Kubernetes Pulled order-api image successfully
+2026-05-20 11:10:07 INFO Kubernetes Created order-api-pod-1
+2026-05-20 11:10:09 INFO Kubernetes Started order-api-pod-1
+2026-05-20 11:10:12 INFO OrderService Healthcheck passed pod=order-api-pod-1
+2026-05-20 11:10:16 INFO OrderService Order request received order_id=ORD1001 user_id=user_201
+2026-05-20 11:10:17 INFO OrderService Inventory validation successful order_id=ORD1001
+2026-05-20 11:10:18 INFO OrderService Order created successfully order_id=ORD1001
+2026-05-20 11:10:22 INFO OrderService Order request received order_id=ORD1002 user_id=user_455
+2026-05-20 11:10:23 INFO OrderService Inventory validation successful order_id=ORD1002
+2026-05-20 11:10:24 INFO OrderService Order created successfully order_id=ORD1002
+2026-05-20 11:10:29 DEBUG OrderService Kafka event published topic=order-events
+2026-05-20 11:10:34 INFO OrderService Healthcheck passed pod=order-api-pod-1
+2026-05-20 11:10:38 INFO OrderService Order request received order_id=ORD1003 user_id=user_722
+2026-05-20 11:10:39 INFO OrderService Inventory validation successful order_id=ORD1003
+2026-05-20 11:10:40 INFO OrderService Order created successfully order_id=ORD1003
+2026-05-20 11:10:45 INFO OrderService Order request received order_id=ORD1004 user_id=user_801
+2026-05-20 11:10:46 INFO OrderService Order created successfully order_id=ORD1004
+2026-05-20 11:10:52 INFO OrderService Healthcheck passed pod=order-api-pod-1
+2026-05-20 11:11:01 WARNING OrderService Inventory API latency increased latency=2400ms
+2026-05-20 11:11:03 WARNING OrderService Retry initiated downstream=inventory-service retry=1
+2026-05-20 11:11:05 INFO OrderService Inventory API recovered latency=420ms
+2026-05-20 11:11:11 INFO OrderService Order request received order_id=ORD1005 user_id=user_992
+2026-05-20 11:11:12 INFO OrderService Order created successfully order_id=ORD1005
+2026-05-20 11:11:16 INFO Deployment Rolling update initiated service=order-api version=v3.4.3
+2026-05-20 11:11:18 INFO Kubernetes Terminated order-api-pod-1
+2026-05-20 11:11:21 INFO Kubernetes Created order-api-pod-2
+2026-05-20 11:11:23 INFO Kubernetes Started order-api-pod-2
+2026-05-20 11:11:25 INFO OrderService Healthcheck passed pod=order-api-pod-2
+2026-05-20 11:11:29 INFO OrderService Order request received order_id=ORD1006 user_id=user_654
+2026-05-20 11:11:30 WARNING OrderService Inventory synchronization delayed
+2026-05-20 11:11:32 ERROR OrderService Inventory reservation failed order_id=ORD1006
+2026-05-20 11:11:33 ERROR OrderService Order creation failed order_id=ORD1006
+2026-05-20 11:11:34 ERROR OrderService API response returned status=500
+2026-05-20 11:11:38 WARNING OrderService Kafka broker communication unstable
+2026-05-20 11:11:42 ERROR OrderService Kafka publish failed topic=order-events
+2026-05-20 11:11:45 ERROR OrderService Dead letter queue push failed order_id=ORD1006
+2026-05-20 11:11:49 WARNING Kubernetes Pod CPU usage high pod=order-api-pod-2 cpu=93%
+2026-05-20 11:11:53 INFO Kubernetes Restarted order-api-pod-2
+2026-05-20 11:11:57 INFO OrderService Healthcheck passed pod=order-api-pod-2
+2026-05-20 11:12:01 INFO OrderService Order request received order_id=ORD1007 user_id=user_843
+2026-05-20 11:12:02 INFO OrderService Inventory validation successful order_id=ORD1007
+2026-05-20 11:12:03 INFO OrderService Order created successfully order_id=ORD1007
+2026-05-20 11:12:09 INFO OrderService Order request received order_id=ORD1008 user_id=user_104
+2026-05-20 11:12:10 INFO OrderService Inventory validation successful order_id=ORD1008
+2026-05-20 11:12:11 INFO OrderService Order created successfully order_id=ORD1008
+2026-05-20 11:12:16 DEBUG OrderService Kafka event published topic=order-events
+2026-05-20 11:12:22 INFO OrderService Healthcheck passed pod=order-api-pod-2
+2026-05-18 13:10:11 INFO OrderService Order service deployment initialized
+2026-05-18 13:10:36 INFO OrderService Kafka consumer connected successfully
+2026-05-18 13:11:02 INFO OrderService Order processing workers registered
+2026-05-18 13:11:29 INFO OrderService Inventory validation service responding normally
+2026-05-18 13:11:53 WARNING OrderService Order processing latency exceeded 1100ms
+2026-05-18 13:12:18 WARNING OrderService Queue backlog increasing rapidly
+2026-05-18 13:12:42 INFO OrderService Autoscaling additional processing workers
+2026-05-18 13:13:07 ERROR OrderService Failed inventory reservation request
+2026-05-18 13:13:31 WARNING OrderService PostgreSQL response latency increasing
+2026-05-18 13:13:58 ERROR OrderService Transaction commit timeout detected
+2026-05-18 13:14:24 INFO OrderService Retrying failed order transaction
+2026-05-18 13:14:49 WARNING OrderService High order retry volume detected
+2026-05-18 13:15:13 ERROR OrderService Kafka message acknowledgment failed
+2026-05-18 13:15:38 WARNING OrderService Elevated API timeout rate observed
+2026-05-18 13:16:02 ERROR OrderService Order state synchronization failed
+2026-05-18 13:16:29 INFO OrderService Redirecting traffic to healthy workers
+2026-05-18 13:16:54 WARNING OrderService CPU utilization exceeded 87 percent
+2026-05-18 13:17:18 ERROR OrderService Failed rollback for partial transaction
+2026-05-18 13:17:44 INFO OrderService Queue cleanup operation started
+2026-05-18 13:18:09 WARNING OrderService Increased dead-letter queue messages detected
+2026-05-18 13:18:34 ERROR OrderService Order event persistence failed
+2026-05-18 13:18:58 INFO OrderService Kafka partition rebalance completed
+2026-05-18 13:19:23 WARNING OrderService Database connection pool nearing exhaustion
+2026-05-18 13:19:49 INFO OrderService Transaction throughput improving gradually
+2026-05-18 13:20:14 INFO OrderService Queue backlog reducing
+2026-05-18 13:20:39 INFO OrderService Order processing latency stabilizing
+2026-05-18 13:21:03 INFO OrderService System recovery completed successfully
