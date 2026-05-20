@@ -1,9 +1,20 @@
 import traceback
+
 from fastapi import FastAPI
+from fastapi import HTTPException
 
 from app.graph.workflow import graph
 
 app = FastAPI()
+
+
+@app.get("/")
+def health_check():
+
+    return {
+        "status": "healthy",
+        "service": "OpsMind AI"
+    }
 
 
 @app.post("/analyze")
@@ -15,42 +26,32 @@ def analyze_incident(incident: dict):
             "incident": incident
         })
 
+        if not isinstance(result, dict):
+
+            raise Exception(
+                "Workflow returned invalid result"
+            )
+
+        if "summary_result" not in result:
+
+            raise Exception(
+                "summary_result missing"
+            )
+
+        if "retrieval_result" not in result:
+
+            result["retrieval_result"] = {
+                "relevant_logs": [],
+                "relevant_docs": []
+            }
+
         return result
 
     except Exception as error:
 
         traceback.print_exc()
 
-        return {
-            "summary_result": {
-                "incident_id": incident.get(
-                    "incident_id",
-                    "UNKNOWN"
-                ),
-                "service": incident.get(
-                    "service",
-                    "Unknown Service"
-                ),
-                "severity": incident.get(
-                    "severity",
-                    "Low"
-                ),
-                "description": incident.get(
-                    "description",
-                    "No description provided"
-                ),
-                "errors_detected": 0,
-                "warnings_detected": 0,
-                "root_cause": "Unknown",
-                "impact": "Unknown",
-                "recommended_fix": (
-                    "Check backend logs"
-                ),
-                "confidence": "low",
-                "status": "failed"
-            },
-            "retrieval_result": {
-                "relevant_logs": [],
-                "relevant_docs": []
-            }
-        }
+        raise HTTPException(
+            status_code=500,
+            detail=f"Workflow Failed: {error}"
+        )
