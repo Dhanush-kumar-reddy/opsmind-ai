@@ -1,21 +1,17 @@
 import sys
+import time
 from pathlib import Path
 
-ROOT_DIR = Path(__file__).resolve().parents[2]
-
-if str(ROOT_DIR) not in sys.path:
-    sys.path.append(str(ROOT_DIR))
-    
-import time
 import graphviz
-
 import pandas as pd
 import requests
 import streamlit as st
 
-from app.database.incident_memory import (
-    get_all_incidents
-)
+ROOT_DIR = Path(__file__).resolve().parents[2]
+
+if str(ROOT_DIR) not in sys.path:
+
+    sys.path.append(str(ROOT_DIR))
 
 from app.tools.metrics_tool import (
     load_metrics
@@ -56,37 +52,109 @@ def get_status(severity):
     )
 
 
+def initialize_session():
+
+    defaults = {
+        "analysis_complete": False,
+        "result": None,
+        "workflow_steps": [],
+        "agent_timings": {}
+    }
+
+    for key, value in defaults.items():
+
+        if key not in st.session_state:
+
+            st.session_state[key] = value
+
+
+def reset_session():
+
+    st.session_state.analysis_complete = False
+
+    st.session_state.result = None
+
+    st.session_state.workflow_steps = []
+
+    st.session_state.agent_timings = {}
+
+
+def execute_agent_step(
+    status_container,
+    agent_name
+):
+
+    start_time = time.time()
+
+    status_container.info(
+        f"{agent_name} Running..."
+    )
+
+    time.sleep(0.5)
+
+    execution_time = round(
+        time.time() - start_time,
+        2
+    )
+
+    status_container.success(
+        f"{agent_name} Completed "
+        f"({execution_time}s)"
+    )
+
+    st.session_state.workflow_steps.append(
+        f"{agent_name} Completed"
+    )
+
+    st.session_state.agent_timings[
+        agent_name
+    ] = execution_time
+
+
+def call_backend_api(incident):
+
+    response = requests.post(
+        API_URL,
+        json=incident,
+        timeout=API_TIMEOUT
+    )
+
+    if response.status_code != 200:
+
+        raise Exception(
+            f"Backend Error: "
+            f"{response.text}"
+        )
+
+    result = response.json()
+
+    if not isinstance(result, dict):
+
+        raise Exception(
+            "Invalid backend response"
+        )
+
+    if "summary_result" not in result:
+
+        raise Exception(
+            "summary_result missing"
+        )
+
+    return result
+
+
 st.set_page_config(
     page_title="OpsMind AI",
     layout="wide"
 )
+
+initialize_session()
 
 st.title("OpsMind AI")
 
 st.subheader(
     "AI Incident Management System"
 )
-
-
-if "analysis_complete" not in st.session_state:
-
-    st.session_state.analysis_complete = False
-
-
-if "result" not in st.session_state:
-
-    st.session_state.result = None
-
-
-if "workflow_steps" not in st.session_state:
-
-    st.session_state.workflow_steps = []
-
-
-if "agent_timings" not in st.session_state:
-
-    st.session_state.agent_timings = {}
-
 
 with st.sidebar:
 
@@ -115,16 +183,9 @@ with st.sidebar:
         "Analyze Incident"
     )
 
-
 if analyze_button:
 
-    st.session_state.analysis_complete = False
-
-    st.session_state.result = None
-
-    st.session_state.workflow_steps = []
-
-    st.session_state.agent_timings = {}
+    reset_session()
 
     incident = {
         "incident_id": "LIVE_INCIDENT",
@@ -133,246 +194,98 @@ if analyze_button:
         "description": description
     }
 
-    workflow_container = st.container()
-
     try:
 
         overall_start = time.time()
 
-        with workflow_container:
+        st.subheader(
+            "Multi-Agent Execution"
+        )
 
-            st.subheader(
-                "Multi-Agent Execution"
+        retrieval_status = st.empty()
+
+        log_status = st.empty()
+
+        metrics_status = st.empty()
+
+        root_status = st.empty()
+
+        summary_status = st.empty()
+
+        execute_agent_step(
+            retrieval_status,
+            "Retrieval Agent"
+        )
+
+        execute_agent_step(
+            log_status,
+            "Log Analysis Agent"
+        )
+
+        execute_agent_step(
+            metrics_status,
+            "Metrics Agent"
+        )
+
+        execute_agent_step(
+            root_status,
+            "Root Cause Agent"
+        )
+
+        summary_status.info(
+            "Summary Agent Running..."
+        )
+
+        summary_start = time.time()
+
+        with st.spinner(
+            "Running multi-agent analysis..."
+        ):
+
+            result = call_backend_api(
+                incident
             )
 
-            retrieval_status = st.empty()
-
-            log_status = st.empty()
-
-            metrics_status = st.empty()
-
-            root_status = st.empty()
-
-            summary_status = st.empty()
-
-            retrieval_start = time.time()
-
-            retrieval_status.info(
-                "Retrieval Agent Running..."
-            )
-
-            time.sleep(0.5)
-
-            retrieval_time = round(
-                time.time() - retrieval_start,
-                2
-            )
-
-            retrieval_status.success(
-                f"Retrieval Agent Completed "
-                f"({retrieval_time}s)"
-            )
-
-            st.session_state.workflow_steps.append(
-                "Retrieval Agent Completed"
-            )
-
-            st.session_state.agent_timings[
-                "Retrieval Agent"
-            ] = retrieval_time
-
-            log_start = time.time()
-
-            log_status.info(
-                "Log Analysis Agent Running..."
-            )
-
-            time.sleep(0.5)
-
-            log_time = round(
-                time.time() - log_start,
-                2
-            )
-
-            log_status.success(
-                f"Log Analysis Agent Completed "
-                f"({log_time}s)"
-            )
-
-            st.session_state.workflow_steps.append(
-                "Log Analysis Agent Completed"
-            )
-
-            st.session_state.agent_timings[
-                "Log Analysis Agent"
-            ] = log_time
-
-            metrics_start = time.time()
-
-            metrics_status.info(
-                "Metrics Agent Running..."
-            )
-
-            time.sleep(0.5)
-
-            metrics_time = round(
-                time.time() - metrics_start,
-                2
-            )
-
-            metrics_status.success(
-                f"Metrics Agent Completed "
-                f"({metrics_time}s)"
-            )
-
-            st.session_state.workflow_steps.append(
-                "Metrics Agent Completed"
-            )
-
-            st.session_state.agent_timings[
-                "Metrics Agent"
-            ] = metrics_time
-
-            root_start = time.time()
-
-            root_status.info(
-                "Root Cause Agent Running..."
-            )
-
-            time.sleep(0.5)
-
-            root_time = round(
-                time.time() - root_start,
-                2
-            )
-
-            root_status.success(
-                f"Root Cause Agent Completed "
-                f"({root_time}s)"
-            )
-
-            st.session_state.workflow_steps.append(
-                "Root Cause Agent Completed"
-            )
-
-            st.session_state.agent_timings[
-                "Root Cause Agent"
-            ] = root_time
-
-            summary_start = time.time()
-
-            summary_status.info(
-                "Summary Agent Running..."
-            )
-
-            with st.spinner(
-                "Running multi-agent analysis..."
-            ):
-
-                response = requests.post(
-                    API_URL,
-                    json=incident,
-                    timeout=API_TIMEOUT
-                )
-
-            if response.status_code != 200:
-
-                summary_status.error(
-                    "Summary Agent Failed"
-                )
-
-                st.error(
-                    f"Backend Error: "
-                    f"{response.text}"
-                )
-
-                st.stop()
-
-            try:
-
-                result = response.json()
-
-            except Exception:
-
-                summary_status.error(
-                    "Invalid JSON Response"
-                )
-
-                st.error(
-                    "Backend returned "
-                    "invalid JSON response"
-                )
-
-                st.stop()
-
-            if not isinstance(result, dict):
-
-                summary_status.error(
-                    "Malformed Response"
-                )
-
-                st.error(
-                    "Backend returned "
-                    "unexpected response format"
-                )
-
-                st.stop()
-
-            if "summary_result" not in result:
-
-                summary_status.error(
-                    "Missing Summary"
-                )
-
-                st.error(
-                    "summary_result missing "
-                    "from backend response"
-                )
-
-                st.json(result)
-
-                st.stop()
-
-            summary_time = round(
-                time.time() - summary_start,
-                2
-            )
-
-            summary_status.success(
-                f"Summary Agent Completed "
-                f"({summary_time}s)"
-            )
-
-            st.session_state.workflow_steps.append(
-                "Summary Agent Completed"
-            )
-
-            st.session_state.agent_timings[
-                "Summary Agent"
-            ] = summary_time
-
-            total_time = round(
-                time.time() - overall_start,
-                2
-            )
-
-            st.session_state.agent_timings[
-                "Total Execution"
-            ] = total_time
-
-            st.session_state.result = result
-
-            st.session_state.analysis_complete = True
-
-            st.success(
-                f"Incident analysis completed "
-                f"in {total_time}s"
-            )
+        summary_time = round(
+            time.time() - summary_start,
+            2
+        )
+
+        summary_status.success(
+            f"Summary Agent Completed "
+            f"({summary_time}s)"
+        )
+
+        st.session_state.workflow_steps.append(
+            "Summary Agent Completed"
+        )
+
+        st.session_state.agent_timings[
+            "Summary Agent"
+        ] = summary_time
+
+        total_time = round(
+            time.time() - overall_start,
+            2
+        )
+
+        st.session_state.agent_timings[
+            "Total Execution"
+        ] = total_time
+
+        st.session_state.result = result
+
+        st.session_state.analysis_complete = True
+
+        st.success(
+            f"Incident analysis completed "
+            f"in {total_time}s"
+        )
 
     except requests.exceptions.Timeout:
 
         st.error(
-            "Request timed out."
+            "Backend request timed out."
         )
 
     except requests.exceptions.ConnectionError:
@@ -386,7 +299,6 @@ if analyze_button:
         st.error(
             f"Unexpected Error: {error}"
         )
-
 
 if st.session_state.analysis_complete:
 
@@ -505,7 +417,9 @@ if st.session_state.analysis_complete:
                 f"{summary.get('confidence', 'low')}"
             )
 
-        st.subheader("Recommended Fix")
+        st.subheader(
+            "Recommended Fix"
+        )
 
         st.info(
             summary.get(
@@ -516,7 +430,9 @@ if st.session_state.analysis_complete:
 
     with tabs[1]:
 
-        st.subheader("Retrieved Logs")
+        st.subheader(
+            "Retrieved Logs"
+        )
 
         logs = (
             result.get(
@@ -580,11 +496,9 @@ if st.session_state.analysis_complete:
 
         st.divider()
 
-        st.subheader(
-            "Log Summary"
+        col1, col2, col3 = (
+            st.columns(3)
         )
-
-        col1, col2, col3 = st.columns(3)
 
         with col1:
 
@@ -607,24 +521,6 @@ if st.session_state.analysis_complete:
                 total_info
             )
 
-        if total_errors >= 4:
-
-            st.error(
-                "Critical operational issue detected."
-            )
-
-        elif total_warnings >= 3:
-
-            st.warning(
-                "System instability detected."
-            )
-
-        else:
-
-            st.success(
-                "System appears stable."
-            )
-
     with tabs[2]:
 
         st.subheader(
@@ -633,78 +529,104 @@ if st.session_state.analysis_complete:
 
         metrics_data = load_metrics()
 
-        for metric in metrics_data:
+        if not metrics_data:
 
-            st.markdown(
-                f"## "
-                f"{metric.get('service', 'Unknown')}"
+            st.warning(
+                "No metrics data found."
             )
 
-            col1, col2, col3, col4 = (
-                st.columns(4)
-            )
+        else:
 
-            with col1:
+            for metric in metrics_data:
 
-                st.metric(
-                    "CPU %",
-                    metric.get(
-                        "cpu_usage",
-                        0
+                if not isinstance(
+                    metric,
+                    dict
+                ):
+
+                    continue
+
+                st.markdown(
+                    f"## "
+                    f"{metric.get('service', 'Unknown')}"
+                )
+
+                col1, col2, col3, col4 = (
+                    st.columns(4)
+                )
+
+                with col1:
+
+                    st.metric(
+                        "CPU %",
+                        metric.get(
+                            "cpu_usage",
+                            0
+                        )
+                    )
+
+                with col2:
+
+                    st.metric(
+                        "Memory %",
+                        metric.get(
+                            "memory_usage",
+                            0
+                        )
+                    )
+
+                with col3:
+
+                    st.metric(
+                        "Error Rate %",
+                        metric.get(
+                            "error_rate",
+                            0
+                        )
+                    )
+
+                with col4:
+
+                    healthy = (
+                        f"{metric.get('healthy_instances', 0)}"
+                        f"/"
+                        f"{metric.get('total_instances', 0)}"
+                    )
+
+                    st.metric(
+                        "Healthy Instances",
+                        healthy
+                    )
+
+                chart_data = pd.DataFrame({
+                    "Metric": [
+                        "CPU",
+                        "Memory",
+                        "Error Rate"
+                    ],
+                    "Value": [
+                        metric.get(
+                            "cpu_usage",
+                            0
+                        ),
+                        metric.get(
+                            "memory_usage",
+                            0
+                        ),
+                        metric.get(
+                            "error_rate",
+                            0
+                        )
+                    ]
+                })
+
+                st.bar_chart(
+                    chart_data.set_index(
+                        "Metric"
                     )
                 )
 
-            with col2:
-
-                st.metric(
-                    "Memory %",
-                    metric.get(
-                        "memory_usage",
-                        0
-                    )
-                )
-
-            with col3:
-
-                st.metric(
-                    "Error Rate %",
-                    metric.get(
-                        "error_rate",
-                        0
-                    )
-                )
-
-            with col4:
-
-                healthy = (
-                    f"{metric.get('healthy_instances', 0)}"
-                    f"/"
-                    f"{metric.get('total_instances', 0)}"
-                )
-
-                st.metric(
-                    "Healthy Instances",
-                    healthy
-                )
-
-            chart_data = {
-                "CPU": metric.get(
-                    "cpu_usage",
-                    0
-                ),
-                "Memory": metric.get(
-                    "memory_usage",
-                    0
-                ),
-                "Error Rate": metric.get(
-                    "error_rate",
-                    0
-                )
-            }
-
-            st.bar_chart(chart_data)
-
-            st.divider()
+                st.divider()
 
     with tabs[3]:
 
@@ -712,41 +634,15 @@ if st.session_state.analysis_complete:
             "Historical Incidents"
         )
 
-        incidents = get_all_incidents()
-
-        rows = []
-
-        for incident in incidents:
-
-            rows.append({
-                "Incident ID": (
-                    incident.incident_id
-                ),
-                "Service": incident.service,
-                "Severity": incident.severity,
-                "Root Cause": (
-                    incident.root_cause
-                ),
-                "Confidence": (
-                    incident.confidence
-                )
-            })
-
-        dataframe = pd.DataFrame(rows)
-
-        st.dataframe(
-            dataframe,
-            use_container_width=True
+        st.info(
+            "Historical incidents are "
+            "managed by backend services."
         )
 
     with tabs[4]:
 
         st.subheader(
             "Workflow Execution"
-        )
-
-        timings = (
-            st.session_state.agent_timings
         )
 
         for step in (
@@ -757,14 +653,10 @@ if st.session_state.analysis_complete:
 
         st.divider()
 
-        st.subheader(
-            "Execution Timings"
-        )
-
         rows = []
 
         for agent, timing in (
-            timings.items()
+            st.session_state.agent_timings.items()
         ):
 
             rows.append({
@@ -779,49 +671,26 @@ if st.session_state.analysis_complete:
             use_container_width=True
         )
 
-        if timings:
-
-            slowest_agent = max(
-                timings,
-                key=timings.get
-            )
-
-            st.warning(
-                f"Slowest Step: "
-                f"{slowest_agent}"
-            )
-
-        st.divider()
-
-        st.subheader(
-            "Agent Workflow Graph"
-        )
-
         workflow_graph = graphviz.Digraph()
 
         workflow_graph.node(
-            "Retrieval",
-            "Retrieval Agent"
+            "Retrieval"
         )
 
         workflow_graph.node(
-            "Logs",
-            "Log Analysis Agent"
+            "Logs"
         )
 
         workflow_graph.node(
-            "Metrics",
-            "Metrics Agent"
+            "Metrics"
         )
 
         workflow_graph.node(
-            "Root",
-            "Root Cause Agent"
+            "Root"
         )
 
         workflow_graph.node(
-            "Summary",
-            "Summary Agent"
+            "Summary"
         )
 
         workflow_graph.edge(
