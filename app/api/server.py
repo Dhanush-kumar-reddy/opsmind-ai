@@ -1,89 +1,56 @@
+import traceback
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
 
 from app.graph.workflow import graph
 
 app = FastAPI()
 
 
-@app.get("/")
-async def health_check():
-
-    return {
-        "status": "healthy"
-    }
-
-
 @app.post("/analyze")
-async def analyze_incident(
-    incident: dict
-):
+def analyze_incident(incident: dict):
 
     try:
 
-        if not incident:
-
-            return JSONResponse(
-                status_code=400,
-                content={
-                    "error": "Empty incident payload"
-                }
-            )
-
-        required_fields = [
-            "incident_id",
-            "service",
-            "severity",
-            "description"
-        ]
-
-        missing_fields = []
-
-        for field in required_fields:
-
-            if field not in incident:
-
-                missing_fields.append(field)
-
-        if missing_fields:
-
-            return JSONResponse(
-                status_code=400,
-                content={
-                    "error": (
-                        "Missing required fields"
-                    ),
-                    "missing_fields": (
-                        missing_fields
-                    )
-                }
-            )
-
-        result = graph.invoke(incident)
-
-        if not result:
-
-            return JSONResponse(
-                status_code=500,
-                content={
-                    "error": (
-                        "Graph returned empty result"
-                    )
-                }
-            )
+        result = graph.invoke({
+            "incident": incident
+        })
 
         return result
 
     except Exception as error:
 
-        print(
-            "SERVER ERROR:",
-            str(error)
-        )
+        traceback.print_exc()
 
-        return JSONResponse(
-            status_code=500,
-            content={
-                "error": str(error)
+        return {
+            "summary_result": {
+                "incident_id": incident.get(
+                    "incident_id",
+                    "UNKNOWN"
+                ),
+                "service": incident.get(
+                    "service",
+                    "Unknown Service"
+                ),
+                "severity": incident.get(
+                    "severity",
+                    "Low"
+                ),
+                "description": incident.get(
+                    "description",
+                    "No description provided"
+                ),
+                "errors_detected": 0,
+                "warnings_detected": 0,
+                "root_cause": "Unknown",
+                "impact": "Unknown",
+                "recommended_fix": (
+                    "Check backend logs"
+                ),
+                "confidence": "low",
+                "status": "failed"
+            },
+            "retrieval_result": {
+                "relevant_logs": [],
+                "relevant_docs": []
             }
-        )
+        }
