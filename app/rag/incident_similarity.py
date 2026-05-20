@@ -14,6 +14,10 @@ from langchain_community.vectorstores import (
     FAISS
 )
 
+from app.core.config import (
+    SIMILARITY_TOP_K
+)
+
 
 def find_similar_incidents(query):
 
@@ -61,7 +65,7 @@ def find_similar_incidents(query):
     results = (
         vector_store.similarity_search(
             query,
-            k=3
+            k=SIMILARITY_TOP_K
         )
     )
 

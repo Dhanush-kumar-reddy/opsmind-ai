@@ -17,6 +17,10 @@ from app.rag.incident_similarity import (
     find_similar_incidents
 )
 
+from app.core.config import (
+    API_TIMEOUT
+)
+
 API_URL = (
     "https://opsmind-ai-i2y2.onrender.com/analyze"
 )
@@ -260,7 +264,7 @@ if analyze_button:
                 response = requests.post(
                     API_URL,
                     json=incident,
-                    timeout=120
+                    timeout=API_TIMEOUT
                 )
 
             if response.status_code != 200:

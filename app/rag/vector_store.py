@@ -17,11 +17,13 @@ from app.rag.document_loader import (
 from app.rag.text_splitter import (
     split_documents
 )
-
+from app.core.config import (
+    OPENAI_EMBEDDING_MODEL
+)
 
 embedding_model = OpenAIEmbeddings(
     api_key=OPENAI_API_KEY,
-    model="text-embedding-3-small"
+    model=OPENAI_EMBEDDING_MODEL
 )
 
 def load_vector_store():
